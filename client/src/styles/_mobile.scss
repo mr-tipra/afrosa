@@ -1,0 +1,133 @@
+@media (max-width: 850px){
+    .hide-sm{
+        display: none;
+    }
+}
+
+@media (max-width: 700px){
+ 
+    html{
+        font-size: 15px;
+    }
+    .large{
+        font-size:2rem;
+    }
+    .lead{
+        font-size: 1.1rem;
+    }
+
+    //navbar
+    .navbar{
+        display: block;
+        text-align: center;
+        &-icon{
+            display: block;
+            position: fixed;
+            z-index: 20;
+            &.dark{
+                color:$dark-color;
+            }
+        }
+      
+        ul{ 
+            position: fixed;
+            z-index: 1;
+            background-color: $dark-color;
+            width:100%;
+            left: 0;
+            top:-250px;
+            flex-direction: column;
+            li{
+                padding:0.4rem 0;
+            }            
+            
+
+            &.show{
+                top: 0px;
+            }
+        }
+        
+    }
+
+    //landing
+    .landing{
+        height: 90vh;
+
+        .video-container{
+            video{
+                height: 125vh;
+            }
+        }
+    }
+    //stats
+    .stats{
+        flex-direction: column;
+        .stat{
+            margin: 0.5rem 0;
+            border-bottom: 1px solid $primary-color;
+        }
+    }
+    //dashboard
+    .dash-buttons .btn{
+        display: block;
+        width: 90%;
+        margin: 0.5rem auto;
+    }
+
+    //profiles
+    //form
+    .form-search{
+        flex-direction: column;
+        align-items: stretch;
+
+        .form-group{
+            margin: 0.5rem 0;
+        }
+    }
+
+    .profile{
+        grid-template-columns: 1fr;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        img{
+            margin: 0 auto;
+        }
+    }
+
+    //profile page
+    .profile-grid{
+        grid-template-areas: 
+        'top'
+        'about'
+        'exp'
+        'edu';
+    }
+
+    .post{
+        grid-template-columns: 1fr;
+        grid-gap:1rem;
+    }
+
+    //admin profiles
+    .profiles-admin{
+        grid-template-columns: 1fr;
+    }
+
+    //footer
+    .page-container{
+        padding-bottom: $footer-height-small;
+    }
+    .footer{
+        height: $footer-height-small;
+        flex-direction: column;
+        padding-bottom: 3rem;
+
+        &-right{
+            h2{
+                text-align: left;
+            }
+
+        }
+    }
+}

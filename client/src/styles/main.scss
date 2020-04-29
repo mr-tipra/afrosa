@@ -1,0 +1,606 @@
+@import "config";
+@import "utils";
+@import "form";
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Baloo Thambi 2', cursive;
+    font-size: 1rem;
+    line-height: 1.6;
+    background: white;
+    color: black;
+}
+
+
+
+
+
+a{
+    text-decoration: none;
+    color: $primary-color;
+}
+
+ul{
+    list-style: none;
+}
+
+img{
+    width: 100%;
+}
+
+
+//font awesome
+.fas{
+    margin: 0 0.2rem;
+}
+
+//Navbar
+.navbar{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // position: relative;
+    padding: 0.7rem 2rem;
+    padding-top:0;
+    padding-bottom: 0;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+    border-bottom: 1px solid $primary-color;
+    opacity: 0.9;
+
+    .logo{
+        display: inline-block;
+        position: relative;
+        top:10px;
+        padding: 0.2rem 0;
+        img{
+            width: 100px;
+        }
+    }
+    ul{
+        display: flex;
+        transition: top 0.3s ease-in-out;
+    }
+    a{
+        color: #fff;
+        padding: 0.45rem;
+        margin: 0 0.25rem;
+        
+        &:hover{
+            color:$primary-color; 
+        }
+    }
+
+    &-icon{
+        position: absolute;
+        top:0px;
+        right: 0px;
+        padding: 0.5rem;
+        color: white;
+        font-size:1.5rem;
+        display: none;
+
+        .dark{
+            color: #222;
+        }
+    }
+}
+
+//landing
+.landing{
+   
+    position: relative;
+    height: 95vh;
+    width: 100%;
+    left:0;
+    top:0;
+    overflow: hidden;
+
+
+    .video-container{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1;
+        video{
+            min-width: 100%;
+            object-fit:contain;
+        }
+    }
+
+    .backdrop{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        img{
+            position: absolute;
+            bottom: 0;
+        }
+    }
+    &-inner{
+        z-index: 10;
+        color: white;
+        height: 75%;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin:auto;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+
+//about us component
+.aboutus{
+    padding:1rem;
+    background:$dark-color;
+    color: white;
+    text-align: center;
+    background-image: linear-gradient(#684726, $dark-color 20%);
+    h1{
+        color: $primary-color;
+        margin-top: 2rem; 
+    }
+    p{
+        line-height: 2.0;
+    }
+}
+
+//company showcase
+.company-showcase{
+    background: $dark-color;
+    width: 100%;
+    // text-align:center;
+    padding: 2rem 0;
+    @include set-background(#222);
+
+    h1{
+        margin: 0;
+        text-align:center;
+    }
+    p{
+        text-align: center;
+    }
+    .companies{
+        display: inline-block;
+        white-space: nowrap;
+        position: relative;
+        // animation-name: companyAnimation;
+        animation-duration:10s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: linear;
+
+        .company{
+            white-space: initial;
+            display: inline-block;
+            width: 100px;
+            overflow: hidden;
+            margin: 0 50px;
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            span{
+                font-size:1.2rem;
+                margin: 0.5rem 0;
+            }
+            img{
+                width: 100%;
+            }
+        }
+    }
+}
+
+@keyframes companyAnimation{
+    0%{
+        left:0;
+    }
+    100%{
+        left: 0%;
+    }
+}
+//stats landing page
+.stats-block{
+    padding:3rem 2rem;
+    color: #fff;
+    background: $dark-color;
+    text-align: center;
+    .stats{
+        padding: 1rem;
+        display: flex;
+        justify-content: space-evenly;
+
+        .stat{
+            display: flex;
+            flex-direction: column;
+            
+            &-value{
+                font-size:4rem;
+            }
+            .fas{
+                font-size: 2rem;
+                color:$primary-color;
+            }
+        }
+    }
+}
+
+//profiles page
+.profile{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap:2rem;
+    padding: 1rem;
+    align-items: center;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    box-shadow: 0px 0px 8px #000;
+    span{
+        text-transform: uppercase; 
+    }
+
+    &-admin{
+        padding: 1rem;
+    }
+}
+
+//admin profiles
+.profiles-admin{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+}
+
+//individual profile
+.profile-grid{
+    display: grid;
+    grid-template-areas: 
+    'top top'
+    'about about'
+    'exp edu';
+    grid-gap:1rem;
+
+    .profile-top{
+        grid-area: top;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        img{
+            width:250px;
+        }
+
+        .icons a{
+            color: white;
+            margin:0 0.3rem;
+            font-size: 2rem;
+
+            &:hover{
+                color: $dark-color;
+            }
+        }
+    }
+    .profile-about{
+        grid-area: about;
+        text-align: center;
+    }
+
+    .profile-exp{
+        grid-area: exp;
+    }
+    .profile-edu{
+        grid-area: edu;
+    }
+    .profile-exp, .profile-edu{
+
+        & > div{
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: gray 1px dotted;
+        }
+
+        &:last-child{
+            border: none;
+        }
+
+        p{
+            margin: 0.5rem 0;
+        }
+    }
+
+}
+
+
+//dashboard
+.dash-image{
+    text-align: center;
+    padding:1rem 0;
+    img{
+        width: 250px;
+    }
+}
+
+//posts page
+
+
+.post{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 2rem;
+    align-items: center;
+    padding: 1rem;
+
+    & > div:first-child{
+        text-align: center;
+        img{
+            width: 150px;
+            
+        }
+    }
+
+    .tags{
+        margin: 0.5rem 0;
+    }
+    .tags span{
+        margin-right: 0.5rem;
+        background-color: #555;
+        color: #fff;
+        padding: 0.2rem;
+        font-size: 0.8rem;
+    }
+}
+
+//map
+.map{
+    width: 100%;
+}
+
+.esri-popup__main-container{
+    background-color: $dark-color !important;
+    color: white !important;
+}
+.esri-popup__header-title:hover{
+    color: #000;
+}
+.esri-widget .map-popup{
+    padding:0.5rem;
+    @include set-background($dark-color);
+    &-user{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 auto;
+        box-shadow: 0px 0px 5px 0px #000;
+        cursor: pointer;
+      
+        .left{
+            flex-basis: 50%;
+            padding:0.5rem;
+            img{
+                border-radius: 20%;
+            }
+        }
+        .right{
+            flex-basis: 50%;
+            padding:1rem;
+            
+        }
+    }
+
+    p{
+        margin: 0.5rem 0;
+        text-align: center;
+    }
+}
+
+
+//messages
+.messages{
+    .message{
+        padding:1rem;
+        box-shadow: 0 0 5px 0 #000;
+        margin: 0.5rem auto;
+
+        .body{
+            padding: 0.5rem 0;
+        }
+        .from{
+            font-size: 1.5rem;
+        }
+        .subject{
+            color: #999;
+        }
+    }
+}
+//footer
+html,body{
+    height: 100%;
+    position: relative;
+}
+
+.page-container{
+    display: none;
+    opacity: 0;
+    transition: opacity 1s;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: $footer-height;
+
+}
+
+.footer{
+    position: absolute;
+    padding:1.2rem;
+    width: 100%;
+    bottom: 0;
+    height: $footer-height;
+    margin-top: auto;
+    display: flex;
+    justify-content:space-between;
+    border-top:2px solid $primary-color;
+    &-left{
+        .logo{
+            text-transform: uppercase;
+            font-size:2rem;
+            margin: 0;
+        }
+        ul{
+            display: flex;
+            li{
+                margin-right:0.5rem;
+                a{
+                    padding: 0.2rem;
+                    cursor: pointer;
+
+                    .fab{
+                        font-size: 1.5rem;
+
+                        &:hover{
+                            color: #fff;
+                        }
+                    }
+
+                    .fa-facebook{
+                        color:#4267B2;
+                    }
+                    .fa-youtube{
+                        color: #FF0000;
+                    }
+                    .fa-instagram{
+                        color: #405DE6;
+                    }
+
+                    .fa-linkedin{
+                        color: #0077b5;
+                    }
+                    .fa-snapchat{
+                        color: #fffc00;
+                    }
+                }
+            }
+            
+        }
+        .copyright{
+            color: #999;
+            position: absolute;
+            bottom: 0;
+        }
+    }
+
+    &-right{
+        h2{
+            text-align: right;
+            margin-bottom: 0.5rem;
+        }
+        .contacts{
+            display: flex;
+            .contact{
+                color: #999;
+                line-height: 1rem;
+                margin-right: 3rem;
+            }
+        }
+    }
+}
+
+
+//teams page
+.team{
+    display: flex;
+    .departments{
+        flex: 1;
+        margin-right:0.5rem;
+        ul{
+            color: white;
+            background-image: linear-gradient(to right, $dark-color, #2F2A29 90% );
+            padding: 1rem;
+            line-height: 3.0;
+            li{
+                cursor: pointer;
+                &:hover{
+                    color:$primary-color;
+                    border-bottom:1px solid $primary-color;
+                }
+            }
+        }
+    }
+    .team-members{
+        flex: 3;
+        .members{
+            display:none;
+
+            &.active{
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-gap: 5px;
+            }
+
+            .member{
+                padding: 1rem;
+            }
+        }
+    }
+}
+//site loader
+.site-loader{
+    background-color: $dark-color;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    &.loader-hide{
+        display: none;
+    }
+
+    #ring{
+        -webkit-animation: rotation 1800ms infinite linear;
+        -moz-animation: rotation 1800ms infinite linear;
+        -o-animation: rotation 1800ms infinite linear;
+        animation: rotation 1800ms infinite linear;
+        transform-origin: 50% 50%;
+        -webkit-transform-origin: 50% 50%;
+        -moz-transform-origin: 50% 50%;
+        transform-origin:initial ;
+        transform-box: fill-box;
+        }
+    @-webkit-keyframes rotation {
+        from {-webkit-transform: rotate(0deg);}
+        to   {-webkit-transform: rotate(359deg);}
+    }
+
+    @-moz-keyframes rotation {
+        from {-moz-transform: rotate(0deg);}
+        to   {-moz-transform: rotate(360deg);}
+    }
+
+    @-o-keyframes rotation {
+        from {-o-transform: rotate(0deg);}
+        to   {-o-transform: rotate(360deg);}
+    }
+    @keyframes rotation {
+        from {transform: rotate(0deg);}
+        to   {transform: rotate(360deg);}
+    }
+}
+
+//media
+@import "mobile";

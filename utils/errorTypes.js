@@ -1,0 +1,7 @@
+const ERROR_INVALID_INPUT = "InvalidInput";
+const ERROR_DUPLI_KEY = "DupliKey";
+const ERROR_SERVER_ERROR = "ServerError";
+const ERROR_UNAUTHORIZED = "Unauthorized";
+const ERROR_VALIDATION = "ValidationError";
+
+module.exports = {ERROR_DUPLI_KEY, ERROR_INVALID_INPUT, ERROR_SERVER_ERROR, ERROR_UNAUTHORIZED, ERROR_VALIDATION};
