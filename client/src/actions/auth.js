@@ -9,7 +9,8 @@ import {
     USER_LOADED,
     LOGOUT,
     CLEAR_PROFILE,
-    EMAIL_VERIFIED
+    EMAIL_VERIFIED,
+    RESET_PASSWORD
 } from "./types";
 
 import { setAlert } from "./alert";
@@ -103,6 +104,60 @@ export const login = ({password, enroll_no}) => async dispatch => {
     }
 };
 
+export const resetPassword = (formData) => async dispatch => {
+
+    try{
+        dispatch({
+            type:START_SUBMIT
+        });
+        const config = {
+            'Content-Type':'application/json'            
+        };
+
+        const res = await axios.post("/api/auth/forgotpassword", formData, config);
+        dispatch({
+            type: RESET_PASSWORD
+        });
+
+        dispatch(setAlert("Reset Link has been sent to your email", "success"));
+    }catch(err){
+        const errRes = err.response.data;
+        dispatch(setAlert(errRes.msg, "danger"));
+        dispatch({
+            type: AUTH_ERROR
+        });
+    }
+    finally{
+        dispatch({
+           type: STOP_SUBMIT
+        });
+    }
+};
+export const verifyResetToken = (token, formData) => async dispatch => {
+
+    try{
+        dispatch({
+            type:START_SUBMIT
+        });
+
+        const config = {
+            'Content-Type':"application/json"
+        };
+
+        const res = await axios.put(`/api/auth/resetpassword/${token}`, formData,
+        config);
+
+        dispatch(setAlert("Password Resetted","success"));
+    }catch(err){
+
+        dispatch(setAlert("Error Resetting the password"));
+    }
+    finally{
+        dispatch({
+            type: STOP_SUBMIT
+        })
+    }
+}
 
 export const verifyEmail = token => async dispatch => {
 

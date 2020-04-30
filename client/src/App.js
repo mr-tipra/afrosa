@@ -27,7 +27,11 @@ import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 
 import MessageList from "./components/messages/MessageList";
-import Team from "./components/team/Team";
+import Teams from "./components/team/Teams";
+
+//Reset Password
+import ForgotPassword from "./components/auth/ForgotPassword";
+import ResetPassword from "./components/auth/ResetPassword";
 
 //website loader
 import WebsiteLoader from "./components/layout/WebsiteLoader";
@@ -85,8 +89,10 @@ function App() {
             <Route exact path="/" render={props => <Landing {...props} onLoad={loadComplete} /> } />
             <Route exact path="/login" component={Login}/>
             <Route exact path="/register" component={Register}/>
+            <Route exact path="/forgotpassword" component={ForgotPassword}/>
+            <Route exact path="/resetpassword/:token" component={ResetPassword}/>
             <Route exact path="/verifyemail/:token" component={VerifyEmail}/>
-            <Route exact path="/team" component={Team} />
+            <Route exact path="/team" component={Teams} />
             <PrivateRoute exact path="/dashboard"  component={Dashboard} />
             <PrivateRoute exact path="/createprofile"  component={CreateProfile} />
             <PrivateRoute exact path="/editprofile" component={EditProfile} />

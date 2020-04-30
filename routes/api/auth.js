@@ -37,7 +37,10 @@ router.post("/register",[
             role,
             enroll_no
         });
-        user.validateSync();
+        const errors = user.validateSync();
+        if(errors){
+            return next(new ErrorResponse(errors.array(), 400, ERROR_INVALID_INPUT));
+        }
         const p1 = await user.save();
         const p2 = await user.sendVerificationMail(req, res,next);
         return res.status(200).json({success:true, msg:"User Registered. Not verified"});

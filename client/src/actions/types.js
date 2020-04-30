@@ -33,6 +33,11 @@ export const FETCHED_MESSAGES = "FETCHED_MESSAGES";
 export const MESSAGE_SENT = "MESSAGE_SENT";
 export const GET_MESSAGES = "GET_MESSAGES";
 export const MESSAGE_ERROR = "MESSAGE_ERROR";
+
+//password
+export const RESET_PASSWORD = "RESET_PASSWORD";
+export const VERIFY_RESET_TOKEN = "VERIFY_RESET_TOKEN";
+
 //admin 
 export const ADMIN_GET_ALL_USERS = "ADMIN_GET_ALL_USERS";
 export const ADMIN_ERROR = "ADMIN_ERROR";

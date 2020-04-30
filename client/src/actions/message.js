@@ -48,7 +48,6 @@ export const getMessages = () => async dispatch => {
         });
 
         const res = await axios.get("/api/messages/me");
-        console.log(res.data);
         dispatch({
             type:GET_MESSAGES,
             payload: res.data.messages

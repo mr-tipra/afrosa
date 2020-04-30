@@ -42,8 +42,8 @@ const Login = (props) => {
                     <input className="btn btn-primary" type="submit" value="Login" disabled={props.submitting}/>
                 </div>
             </form>
-            <p className="my-1">No account? <Link to="/register">Sign Up</Link>
-            </p>
+            <p className="my-1">No account? <Link to="/register">Sign Up</Link> </p>
+            <p className="my-1"><Link to="/forgotpassword">Forgot Password?</Link></p>
        </section>
     )
 }

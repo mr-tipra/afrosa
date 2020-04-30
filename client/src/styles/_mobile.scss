@@ -114,6 +114,30 @@
         grid-template-columns: 1fr;
     }
 
+
+    //teams page
+    .team{
+        flex-direction: column;
+        position:relative;
+        .departments{
+            
+            ul{
+                background: rgba($dark-color, 0.5);
+                width: 100%;
+                text-align: center;
+                li{
+                    border-bottom: 1px solid $primary-color;
+                }
+            }
+        }
+        .team-members{
+            .members{
+                &.active{
+                    display: block;
+                }
+            }
+        }
+    }
     //footer
     .page-container{
         padding-bottom: $footer-height-small;
