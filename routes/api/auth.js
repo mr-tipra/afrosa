@@ -205,7 +205,7 @@ router.post("/forgotpassword", async (req, res, next)=>{
     await user.save({validateBeforeSave:false});
 
     //create reset url
-    const resetURL = `${req.protocol}://${req.get('host')}/api/auth/resetpassword/${resetToken}`;
+    const resetURL = `${req.protocol}://${req.get('host')}/resetpassword/${resetToken}`;
 
     //email verification link
     const message = "Click to reset password: " + `<a href=${resetURL}>Here</a>`;
