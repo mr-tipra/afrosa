@@ -10,6 +10,7 @@ const Stats = props => {
     });
 
     useEffect(() => {
+        const ids = []
 
         axios.get("/api/users/stats")
         .then(res => {
@@ -43,20 +44,25 @@ const Stats = props => {
                     return {...state, companies: state.companies+1}
                 });
              }, 33);
+             ids.push(id1);
+             ids.push(id2);
+             ids.push(id3);
         })
         .catch(err => {
             console.log(err.response.data.msg);
         });
 
-    
-
+        return () => {
+            ids.map(id => clearInterval(id));
+        }
+       
 
     }, []);
 
     return (
         <div className="stats-block">
             <h2 className="x-large text-primary">Afrosa</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis veniam corrupti amet modi nemo ab dicta unde accusantium aspernatur sapiente pariatur facilis laudantium accusamus veritatis possimus, optio iure! Dolorum ea, explicabo, excepturi deserunt debitis quae id, quas commodi neque perspiciatis recusandae? Suscipit accusantium illo, ratione quisquam itaque fuga vero consequatur.</p>
+            <h2>Stats</h2>
 
             <div className="stats">
                 <div className="stat">

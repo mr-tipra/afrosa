@@ -8,8 +8,10 @@ import About from "./About";
 import CompanyShowcase from "./CompanyShowcase";
 
 const Landing = (props) => {
-    if(props.isAuthenticated)
+    if(props.isAuthenticated){
+        props.onLoad();
         return <Redirect to="/dashboard" />
+    }
     
  
     return (

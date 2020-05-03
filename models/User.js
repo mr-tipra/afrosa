@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
     reset_password_expire:Date,
     role:{
         type:String,
-        enum:["student","alumnus"],
+        enum:["student","alumnus", "admin", "alumni_relations","student_relations"],
         required:true
     },
     created_at: {type:Date, default:Date.now},
@@ -36,7 +36,8 @@ const UserSchema = new mongoose.Schema({
         type:String,
         unique:true,
         required: [true,"Please enter enrollment number"]
-    }
+    },
+    blocklist: [{type:mongoose.Schema.Types.ObjectId, ref:"user"}]
 });
 
 //encrypt pass with brcypt
@@ -72,7 +73,14 @@ UserSchema.methods.sendVerificationMail = async function(req, res){
         const resetURL = `${req.protocol}://${req.get("host")}/verifyemail/${token}`;
 
         //email verification link
-        const message = "Click to verify email: " + `<a href=${resetURL}>Here</a>`;
+        const message = "<div style='padding:2rem'>" + 
+        "<h2 style='text-align:center'>Welcome To Afrosa</h2>" +
+        `<p> Thank you for signing up. You are now part of the culture/community/group where we bridge the gap between students and  alumni. <a href=${resetURL} >Click here to verify your email now! </a> </p>` +
+        '<p>Second verfication will be done shortly by our administrators</p>' +
+        '<br/>' +
+        '<p>Regards,</p>'+
+        '<p>Afrosa</p>'+
+        "</div>";
     
         await sendMail({
             email:this.email,

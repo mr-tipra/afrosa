@@ -10,7 +10,8 @@ import {
     PROFILE_PICTURE_UPDATED,
     FETCHING_PROFILES,
     START_SUBMIT,
-    STOP_SUBMIT
+    STOP_SUBMIT,
+    GET_MORE_PROFILES
 } from "./types";
 
 //get profile
@@ -90,7 +91,6 @@ export const createProfile  = (formData, history, edit = false) => async dispatc
             history.push("/dashboard");
         }
     }catch(err){
-        console.log(err.response);
         if(err.response.data.kind === "InvalidInput"){
             err.response.data.msg.forEach(msg => dispatch(setAlert(msg)));
         }
@@ -282,6 +282,26 @@ export const getAllProfiles = (query) => async dispatch => {
     }
 }
 
+//get all profiles
+export const getMoreProfiles = (query) => async dispatch => {
+
+    try{
+        const res = await axios.get("/api/profile",{
+            params: query
+        });
+
+        dispatch({
+            type:GET_MORE_PROFILES,
+            payload: res.data.profiles
+        })
+
+    }catch(err){
+        dispatch({
+            type:PROFILE_ERROR,
+            payload: {msg: err.response.data.msg, statusCode: err.response.data.status}
+        })
+    }
+}
 
 //get profile by id
 export const getProfileById = uid => async dispatch => {

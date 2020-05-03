@@ -1,5 +1,6 @@
 import {
-    ADMIN_GET_ALL_USERS, ADMIN_ERROR, ADMIN_VERIFY_USER
+    ADMIN_GET_ALL_USERS, ADMIN_ERROR, ADMIN_VERIFY_USER, ADMIN_DELETE_USER, ADMIN_GET_ALL_ALUMNI,
+    ADMIN_GET_ALL_STUDENTS
 } from "../actions/types";
 
 
@@ -13,6 +14,8 @@ export default function(state = initialState, action){
     switch(type){
 
         case ADMIN_GET_ALL_USERS:
+        case ADMIN_GET_ALL_STUDENTS:
+        case ADMIN_GET_ALL_ALUMNI:
             return {
                 ...state,
                 users: payload,
@@ -28,6 +31,12 @@ export default function(state = initialState, action){
                     return user;
                 })
             }
+        case ADMIN_DELETE_USER:
+            return {
+                ...state,
+                users: state.users.filter(user => user.enroll_no !== payload)
+            }
+        
         case ADMIN_ERROR:
             return {
                 ...state,

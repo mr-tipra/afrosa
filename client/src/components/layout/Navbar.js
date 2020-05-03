@@ -62,7 +62,8 @@ const Navbar = (props) => {
             <li><Link to="/messages" onClick={toggleNav}><i className="fas fa-envelope"></i>Messages</Link></li>
 
             {//admin only
-            !props.auth.loading && props.auth.user && props.auth.user.role === "admin" && 
+            !props.auth.loading && props.auth.user && (props.auth.user.role === "admin" ||
+            props.auth.user.role === 'student_relations' || props.auth.user.role === 'alumni_relations') && 
             <li><Link to="/admin/userslist" onClick={toggleNav}><i className="fas fa-user-cog"></i>All Users</Link></li>
             }
             <li><Link onClick={e=> { toggleNav(); props.logout(); }} to="/"><i className="fas fa-sign-out-alt"></i>

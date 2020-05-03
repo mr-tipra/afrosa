@@ -106,7 +106,7 @@ const CreateProfile = props => {
                     </select>
                 </div>
                 <div className="form-group">
-                    <input type="number" placeholder="*Batch Year" name="batch"
+                    <input type="number" placeholder="*Admission Year" name="batch"
                     value={batch} onChange={e=>onChange(e)} required/>
                 </div>
 

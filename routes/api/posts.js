@@ -53,7 +53,7 @@ router.get("/", [protect, collegeVerified], async (req, res,next) => {
             delete req.query.tags;
         }
          
-
+    
         if(req.query.id){
             req.query._id = req.query.id;
             delete req.query.id;
@@ -63,12 +63,19 @@ router.get("/", [protect, collegeVerified], async (req, res,next) => {
         if(req.query.name){
             req.query.name = {"$regex":req.query.name,"$options":"i"}
         }
-
-        const lim = parseInt(req.query.limit) || 50;
-
-        ["limit"].forEach(q => delete req.query[q]);
         
-        const posts = await Post.find(req.query).sort({date:-1}).limit(lim);
+        //paging   
+        const count = Number.parseInt(req.query.count) || 2;
+        const page = Number.parseInt(req.query.page) || 0;
+        ["limit",'page','count'].forEach(q => delete req.query[q]);
+        
+        const posts = await Post.find(req.query, null, {
+            skip:count* page,
+            limit: count,
+            sort:{
+                date: -1
+            }
+        });
         return res.status(200).json({success:true, posts});
 
     }catch(err){

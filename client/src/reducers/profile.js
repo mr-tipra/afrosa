@@ -6,7 +6,8 @@ import {
     ACCOUNT_DELETED,
     GET_PROFILES,
     PROFILE_PICTURE_UPDATED,
-    FETCHING_PROFILES
+    FETCHING_PROFILES,
+    GET_MORE_PROFILES
 } from "../actions/types";
 
 const initialState = {
@@ -25,6 +26,11 @@ export default function(state = initialState, action){
                 profiles: payload,
                 loading: false
             } 
+        case GET_MORE_PROFILES:
+            return {
+                ...state,
+                profiles: state.profiles.concat(payload)
+            }
         case PROFILE_PICTURE_UPDATED:{
             return {
                 ...state,

@@ -5,6 +5,7 @@ const {protect, authorize} = require("../../middleware/auth");
 const User = require("../../models/User");
 const Profile = require("../../models/Profile");
 const Comapany = require("../../models/Company");
+const Message = require("../../models/Message");
 
 const {ERROR_DUPLI_KEY, ERROR_INVALID_INPUT, ERROR_SERVER_ERROR, ERROR_UNAUTHORIZED} = require("../../utils/errorTypes");
 
@@ -37,17 +38,51 @@ router.get("/", [protect, authorize('admin')], async (req, res, next) =>{
        
        try{
               
-              const users = await User.find(req.query);
+              const users = await User.find({
+                     ...req.query,
+                     '$or':[{role:'student'}, {role:'alumni'}]
+              });
               return res.status(200).json({success:true, users});
        }catch(err){
               return next(err);
        }
 });
 
+
+//@desc   get all students
+//@route  GET /api/users/students
+//@access private
+router.get("/students", [protect, authorize('admin', 'student_relations','alumni_relations')], async (req, res, next) =>{
+       try{
+              
+              const users = await User.find({...req.query, role:'student'});
+              return res.status(200).json({success:true, users});
+       }catch(err){
+              return next(err);
+       }
+});
+
+
+//@desc   get all alumni
+//@route  GET /api/users/alumni
+//@access private
+router.get("/alumni", [protect, authorize('admin', 'student_relations','alumni_relations')], async (req, res, next) =>{
+       try{
+              
+              const users = await User.find({...req.query, role:'alumni'});
+              return res.status(200).json({success:true, users});
+       }catch(err){
+              return next(err);
+       }
+});
+
+
+
+
 //@desc   delete an user by roll no
 //@route  DELETE /api/:eno
 //@access private
-router.delete("/:eno", [protect, authorize('admin')], async (req, res, next) =>{
+router.delete("/:eno", [protect, authorize('admin',"alumni_relations","student_relations")], async (req, res, next) =>{
        
        try{
               const user = await User.findOne({enroll_no:req.params.eno});
@@ -55,8 +90,26 @@ router.delete("/:eno", [protect, authorize('admin')], async (req, res, next) =>{
                      return next(new ErrorResponse("No user by given enroll number", 400, ERROR_INVALID_INPUT));
               //delete profile if exists
               const profile = await Profile.findOne({user:user.id});
-              if(profile)
+              if(profile){
+                     //delete companies
+                     profile.experiences.map(async exp => {
+                            const company = await Company.findById(exp.company);
+                            if(company){
+                                   //delete
+                                   if(user.role === "student")
+                                          company.students--;
+                                   else if(user.role === "alumni")
+                                          company.alumni--;
+                                   if(company.students<=0 && company.alumni <= 0)
+                                          await company.delete();
+                                   else
+                                          await company.save();
+                            }
+                     });
                      await profile.remove();
+              }
+              //delete All Message
+              await Message.deleteMany({'$or': [{from:user._id}, {to:user._id}]});
               await user.remove();
               return res.status(200).json({success:true});
        }catch(err){
@@ -69,7 +122,7 @@ router.delete("/:eno", [protect, authorize('admin')], async (req, res, next) =>{
 //@desc   get profile
 //@route  GET /api/:eno
 //@access private
-router.get("/:eno", [protect, authorize('admin')], async (req, res, next) =>{
+router.get("/:eno", [protect, authorize('admin','student_relations','alumni_relations')], async (req, res, next) =>{
        
        try{
               const user = await User.findOne({enroll_no:req.params.eno});
@@ -92,7 +145,7 @@ router.get("/:eno", [protect, authorize('admin')], async (req, res, next) =>{
 //@desc   verify college by enroll no
 //@route  PUT /api/:eno
 //@access private
-router.put("/collegeverify/:eno", [protect, authorize('admin')], async (req, res, next) =>{
+router.put("/collegeverify/:eno", [protect, authorize('admin',"student_relations","alumni_relations")], async (req, res, next) =>{
        
        try{
               const user = await User.findOne({enroll_no:req.params.eno});

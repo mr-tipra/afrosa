@@ -63,6 +63,8 @@ function App() {
   useEffect(() => {
     store.dispatch(loadUser());
     const path = window.location.href.split("/");
+    document.querySelector("body").style.backgroundColor='#20282c';
+
     if(path[path.length-1] != "")
       loadComplete();
   },[]);
@@ -70,11 +72,12 @@ function App() {
   const loadComplete = () => {
     setTimeout(() => {  
       setSiteLoading(false);
+      document.querySelector("body").style.backgroundColor='white';
       document.querySelector(".page-container").style.display='block';
       setTimeout(() => {
         document.querySelector(".page-container").style.opacity='1.0';
       }, 0);
-    }, 2000);
+    }, 4000);
   };
 
   return <Fragment>

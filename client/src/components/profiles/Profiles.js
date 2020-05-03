@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 import {connect} from "react-redux";
 import Spinner from "../layout/Spinner";
 import ProfileItem from "./ProfileItem";
-import {getAllProfiles} from "../../actions/profile";
+import {getAllProfiles, getMoreProfiles} from "../../actions/profile";
+
+
+//infinte scroll
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Profiles = props => {
 
@@ -11,17 +15,28 @@ const Profiles = props => {
         name:"",
         role:"",
         batch:"",
-        branch:""
+        branch:"",
     });
 
+    const [page, setPage] = useState(0);
+    const count = 5;
+    const [prevSize, setPrevSize] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
+    
+    
     const years = [];
 
     for(let i=1975; i<=parseInt(new Date().getFullYear()); i++)
         years.push(i);
 
+   
+
     useEffect(() => {
+        
         //make query
         const query = {};
+        query.page = page;
+        query.count = count;
         if(search.batch !== "")
             query.batch = search.batch;
         if(search.role !== "")
@@ -35,8 +50,30 @@ const Profiles = props => {
     }, [search]);
 
     const onChange = e => {
-        setSearch({...search, [e.target.name]:e.target.value});
+        setHasMore(true);
+        setPrevSize(0);
+        setPage(0);
+
+        setSearch({...search, [e.target.name]:e.target.value, page:0});
     };
+    const fetchNextPage = () => {
+        //make query
+        const query = {};
+        query.page = page+1;
+        setPage(page+1);
+        query.count = count;
+        if(search.batch !== "")
+            query.batch = search.batch;
+        if(search.role !== "")
+            query.user_role = search.role;
+        if(search.branch !== "")
+            query.branch = search.branch;
+        if(search.name !== "")
+            query.name = search.name;
+        
+        props.getMoreProfiles(query);
+    }
+
     return (
         <section className="container">
             <form className="form-search" >
@@ -80,13 +117,21 @@ const Profiles = props => {
                 <h1 className="large text-primary">Users</h1>
                 <p className="lead">Connect with Students/Alumnus</p>
                 <div className="profiles">
-                    {props.profile.profiles.length > 0 ?(
+                    <InfiniteScroll
+                    dataLength={props.profile.profiles.length}
+                    next={fetchNextPage}
+                    hasMore={hasMore}
+                    >
+                    {props.profile.profiles.length > 0 ?
+                    (
                         props.profile.profiles.map(prof => (
                             <ProfileItem key={prof._id} profile={prof} />
                         ))
-                    ):
+                    )
+                    :
                     <h4 className="text-primary">No profiles found</h4>
                     }
+                    </InfiniteScroll>
                 </div>
             </Fragment>
         }
@@ -103,4 +148,4 @@ const mapStateToProps = state => ({
     profile:state.profile
 });
 
-export default connect(mapStateToProps, {getAllProfiles})(Profiles);
+export default connect(mapStateToProps, {getAllProfiles, getMoreProfiles})(Profiles);

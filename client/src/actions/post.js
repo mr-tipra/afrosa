@@ -10,7 +10,8 @@ import {
     REMOVE_COMMENT,
     SEARCHING_POSTS,
     START_SUBMIT,
-    STOP_SUBMIT
+    STOP_SUBMIT,
+    GET_MORE_POSTS
 } from "./types";
 
 
@@ -41,6 +42,29 @@ export const getPosts = (filter) => async dispatch => {
     }
 }
 
+//GET POSTS
+export const getMorePosts = (filter) => async dispatch => {
+    try{
+
+      
+        const res = await axios.get("/api/posts", {
+            params: filter
+        }
+        );
+
+        dispatch({
+            type:GET_MORE_POSTS,
+            payload: res.data.posts
+        });
+
+    }catch(err){
+
+        dispatch({
+            type: POST_ERROR,
+            payload:{msg:err.response.data.msg, status:err.response.data.status}
+        });
+    }
+}
 
 //GET A POST
 export const getPost = id => async dispatch => {

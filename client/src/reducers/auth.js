@@ -1,7 +1,7 @@
 import {REGISTER_SUCCESS, REGISTER_FAIL, START_SUBMIT, 
     STOP_SUBMIT,
     LOGIN_SUCCESS, LOGIN_FAILURE,
-    USER_LOADED, AUTH_ERROR, LOGOUT, ACCOUNT_DELETED
+    USER_LOADED, AUTH_ERROR, LOGOUT, ACCOUNT_DELETED, ADD_TO_BLOCKLIST, REMOVE_FROM_BLOCKLIST
 } from "../actions/types";
 
 const initialState = {
@@ -41,7 +41,13 @@ export default function(state = initialState, action){
             return {
                 ...state, submitting: false
             }
-
+        case ADD_TO_BLOCKLIST:
+        case REMOVE_FROM_BLOCKLIST:
+            return {
+                ...state,
+                user: {...state.user, blocklist: payload}
+            }
+        
         case LOGIN_SUCCESS:
             localStorage.setItem("token",payload.token);
             return {

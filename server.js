@@ -27,6 +27,8 @@ app.use(fileUpload({
 //connect to DB
 connectDB();
 
+
+
 //routes
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));

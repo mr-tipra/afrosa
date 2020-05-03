@@ -8,13 +8,15 @@ const PrivateRouteAdmin = ({component:Component, setAlert,auth,...rest}) => {
 
     if(auth.user && !auth.user.college_verified)
         setAlert("Not College Verified");
-    if(auth.user && auth.user.role !== "admin")
+    const allowedRoles = ['admin', 'student_relations','alumni_relations'];
+    const isAllowed = auth.user && allowedRoles.includes(auth.user.role); 
+    if(auth.user && !isAllowed)
         setAlert("Admin Only");
         
     return (
         <Route {...rest} render={props=>!auth.isAuthenticated ||
             auth.loading ||
-            (auth.user && !auth.user.college_verified && auth.user.role !== "admin") ? (<Redirect to="/dashboard"/>):
+            (auth.user && !auth.user.college_verified && !isAllowed) ? (<Redirect to="/dashboard"/>):
         (<Component {...props} />)} />
     );
 }

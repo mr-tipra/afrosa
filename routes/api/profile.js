@@ -116,17 +116,19 @@ router.get("/", [protect,collegeVerified], async (req, res,next) => {
        try{
               const qUser = {};
               if(req.query.name)
-                     qUser.name = req.query.name.toLowerCase();
-
-              const removeFields = ["name"];
-              removeFields.map(f => delete req.query[f]);
+                     qUser.name = req.query.name.toLowerCase();       
               
-              let profiles = await Profile.find(req.query).populate("user", populateQuery);
-              profiles = profiles.filter(p => p.user.name.startsWith(qUser.name?qUser.name:""));
 
-              // const profiles = await Profile.find(req.query);
-              // profiles.find({})
-           return res.status(200).json({success:true, profiles});
+              const count = Number.parseInt(req.query.count) || 2;
+              const page = Number.parseInt(req.query.page) || 0;
+
+              const removeFields = ["name", "page", "count"];
+              removeFields.map(f => delete req.query[f]);
+              let profiles = await Profile.find(req.query ).populate("user", populateQuery);
+              profiles = profiles.filter(p => p.user.name.toLowerCase().startsWith(qUser.name?qUser.name:""));
+              profiles = profiles.slice(page*count, page*count + count);
+              
+              return res.status(200).json({success:true, profiles});
        }catch(err){
            return next(err);
        }
@@ -322,25 +324,6 @@ router.delete("/qualifications/:id", protect,async(req, res, next) => {
        }
 });
 
-
-// @route DELETE api/profile
-// @desc delete profile, user and posts
-// @access private
-router.delete("/", protect, async (req, res, next)=>{
-
-       try{
-              //all posts deleted
-           await Post.deleteMany({user:req.user.id});
-           // remove profile
-           const profile = await Profile.findOneAndRemove({user: req.user.id});
-           // remove user
-           await User.findOneAndRemove({_id: req.user.id});
-   
-           return res.status(200).json({success:true,msg:'User and Profile deleted'});
-       }catch(err){
-           return next(err);
-       }
-   });
 
 
 

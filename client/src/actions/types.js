@@ -16,9 +16,12 @@ export const CLEAR_PROFILE = "CLEAR_PROFILE";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const ACCOUNT_DELETED = "ACCOUNT_DELETED ";
 export const GET_PROFILES = "GET_PROFILES ";
+export const GET_MORE_PROFILES = "GET_MORE_PROFILES";
 export const GET_POSTS = "GET_POSTS";
 export const SEARCHING_POSTS = "SEARCHING_POSTS";
 export const GET_POST   = "GET_POST";
+export const GET_MORE_POSTS   = "GET_MORE_POSTS";
+
 export const POST_ERROR = "POST_ERROR ";
 export const DELETE_POST = "DELETE_POST";
 export const ADD_POST = "ADD_POST";
@@ -33,6 +36,9 @@ export const FETCHED_MESSAGES = "FETCHED_MESSAGES";
 export const MESSAGE_SENT = "MESSAGE_SENT";
 export const GET_MESSAGES = "GET_MESSAGES";
 export const MESSAGE_ERROR = "MESSAGE_ERROR";
+export const REPLY_SENT = "REPLY_SENT";
+export const ADD_TO_BLOCKLIST = "ADD_TO_BLOCKLIST";
+export const REMOVE_FROM_BLOCKLIST = "REMOVE_FROM_BLOCKLIST";
 
 //password
 export const RESET_PASSWORD = "RESET_PASSWORD";
@@ -40,5 +46,8 @@ export const VERIFY_RESET_TOKEN = "VERIFY_RESET_TOKEN";
 
 //admin 
 export const ADMIN_GET_ALL_USERS = "ADMIN_GET_ALL_USERS";
+export const ADMIN_GET_ALL_STUDENTS = "ADMIN_GET_ALL_STUDENTS";
+export const ADMIN_GET_ALL_ALUMNI = "ADMIN_GET_ALL_ALUMNI";
 export const ADMIN_ERROR = "ADMIN_ERROR";
 export const ADMIN_VERIFY_USER = "ADMIN_VERIFY_USER";
+export const ADMIN_DELETE_USER = "ADMIN_DELETE_USER";

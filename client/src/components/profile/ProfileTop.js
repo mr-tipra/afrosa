@@ -10,7 +10,7 @@ const ProfileTop = props => {
         <div className="profile-top bg-primary p-2">
             <ProfileImage image={profile.display_picture} />
             <h1 className="large">{profile.user.name}</h1>
-            <p className="lead">{user.role.toUpperCase()} of batch {profile.batch}, {profile.branch.toUpperCase()}</p>
+            <p className="lead">{user.role.toUpperCase()} joined UEC in {profile.batch}, {profile.branch.toUpperCase()}</p>
             {profile.addr &&  profile.addr.state && 
             <div className="address">
                 <p className="lead">Address</p>

@@ -8,7 +8,7 @@ const ProfileSchema = new mongoose.Schema({
         ref: "user",
         required: true
     },
-    user_role:{type:String, enum:["student", "alumnus","admin"]},
+    user_role:{type:String, enum:["student", "alumnus","admin","student_relations","alumni_relations"]},
     website:String,
     addr: {
         addr_line:String,

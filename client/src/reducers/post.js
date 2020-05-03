@@ -7,7 +7,8 @@ import {
     ADD_POST,
     ADD_COMMENT,
     REMOVE_COMMENT,
-    SEARCHING_POSTS
+    SEARCHING_POSTS,
+    GET_MORE_POSTS
 } from "../actions/types";
 
 const initialState = {
@@ -28,6 +29,11 @@ export default function(state = initialState, action){
                 posts: payload,
                 loading: false,
                 isSearching: false
+            }
+        case GET_MORE_POSTS:
+            return {
+                ...state,
+                posts: state.posts.concat(payload)
             }
         case SEARCHING_POSTS:
             return {

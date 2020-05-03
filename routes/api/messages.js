@@ -32,8 +32,21 @@ router.post("/", [protect, collegeVerified,
 
         if(!user || from === user.id)
             return next(new ErrorResponse("Invalid destination address", 400,ERROR_INVALID_INPUT));
-        const toId = user.id;
-    
+        const toId = user._id;
+        
+        //check blocklist
+        const currUser = await User.findById(req.user.id);
+        const fromBlocklist = currUser.blocklist || [];
+        const toBlocklist = user.blocklist || [];
+
+        console.log(fromBlocklist, toBlocklist, from, to);
+        if(fromBlocklist && (fromBlocklist.findIndex(u => u.toString()===to.toString()) !== -1))
+            return next(new ErrorResponse("blocked_user", 401, ERROR_INVALID_INPUT));
+
+        if(toBlocklist && (toBlocklist.findIndex(u => u.toString()===from.toString()) !== -1))
+            return next(new ErrorResponse("blocked_user", 401, ERROR_INVALID_INPUT));
+        
+
         const msg = await Message.create({
             from, to:toId, subject, body
         });
@@ -44,6 +57,55 @@ router.post("/", [protect, collegeVerified,
     }
 });
 
+//@desc   add thread msg to a msg
+//@route  POST api/messages/:mid
+//@access private
+router.post("/:mid", [protect, collegeVerified,
+    check("body").exists().trim()
+],async (req, res, next) =>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty())
+        return next(new ErrorResponse(errors.array(),400, ERROR_INVALID_INPUT));
+
+    const{
+        body
+    } = req.body;
+    const sender = req.user.id;
+
+    try{
+        const msg = await Message.findById(req.params.mid).populate('from',["name"]).populate('to',["name"]);
+        if(!msg || (msg.from._id.toString() !== sender && msg.to._id.toString() !== sender))
+            return next(new ErrorResponse("Invalid destination address", 400,ERROR_INVALID_INPUT));
+
+        let to;
+        if(sender.toString() === msg.from._id.toString())
+            to = msg.to._id;
+        else to = msg.from._id;
+
+        //check blocklist
+        const from = req.user.id;
+        const currUser = await User.findById(req.user.id);
+        const fromBlocklist = currUser.blocklist || [];
+        
+        if(fromBlocklist && (fromBlocklist.findIndex(u => u.toString()===to.toString()) !== -1))
+        return next(new ErrorResponse("blocked_user", 401, ERROR_INVALID_INPUT));
+        
+        const toUser = await User.findById(to);
+        const toBlocklist = toUser.blocklist || [];
+        if(toBlocklist && (toBlocklist.findIndex(u => u.toString()===from.toString()) !== -1))
+            return next(new ErrorResponse("blocked_user", 401, ERROR_INVALID_INPUT));
+        
+
+        msg.thread.push({
+            sender, body
+        });
+        await msg.save();
+        return res.status(200).json({success:true, msg});
+    }catch(err){
+        console.log(err);
+        return next(err);
+    }
+});
 
 //@desc   get all messages for curr user
 //@route  POST api/messages/me
@@ -51,9 +113,11 @@ router.post("/", [protect, collegeVerified,
 router.get("/me", [protect, collegeVerified],async (req, res, next) =>{
 
     try{
-        const msgs = await Message.find({to:req.user.id})
-        .select("-to")
+        const msgs = await Message.find({
+            $or:[ {to:req.user.id}, {from:req.user.id}]
+        })
         .populate("from",["name"])
+        .populate("to",["name"])
         .sort({date:-1});
 
         return res.status(200).json({success:true, messages:msgs});
@@ -73,13 +137,44 @@ router.delete("/:mid", [protect, collegeVerified,
         if(!msg)
             return next(new ErrorResponse("Invalid Msg id",400, ERROR_INVALID_INPUT));
         //check if user send the msg
-        console.log(msg.from, req.user.id);
         if(msg.from.toString() !== req.user.id)
             return next(new ErrorResponse("Not authorized for deletion", 401, ERROR_UNAUTHORIZED));
         
         //delete
         await msg.remove();
         return res.status(200).json({success:true});
+    }catch(err){
+        return next(err);
+    }
+});
+
+router.put("/block/:uid", [protect, collegeVerified], async (req, res, next) => {
+
+    try{
+        const user = await User.findById(req.user.id);
+        //check user exist
+        const blockUser = await User.findById(req.params.uid);
+        if(!blockUser)
+            return next(new ErrorResponse("Invalid User Id", 400, ERROR_INVALID_INPUT));
+        //add to block list
+        user.blocklist.push(blockUser._id);
+        await user.save();
+        return res.status(200).json({success: true, blocklist:user.blocklist});
+    }catch(err){
+        return next(err);
+    }
+});
+
+router.delete("/block/:uid", [protect, collegeVerified], async (req, res, next) => {
+
+    try{
+        const user = await User.findById(req.user.id);
+        //check user exist
+
+        //add to block list
+        user.blocklist = user.blocklist.filter(u => u.toString() !== req.params.uid);
+        await user.save();
+        return res.status(200).json({success: true, blocklist:user.blocklist});
     }catch(err){
         return next(err);
     }

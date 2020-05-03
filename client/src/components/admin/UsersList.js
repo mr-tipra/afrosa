@@ -1,12 +1,12 @@
 import React, {useState, useEffect,  Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from "react-redux";
-import {getAllUsers} from "../../actions/admin";
+import {getAllUsers, getAllStudents, getAllAlumni} from "../../actions/admin";
 
 import Spinner from "../layout/Spinner";
 import ProfileItemAdmin from './ProfileItemAdmin';
 
-const UsersList = ({admin, getAllUsers}) => {
+const UsersList = ({admin, getAllUsers, getAllStudents, getAllAlumni,user}) => {
 
 
     const [query, setQuery] = useState({
@@ -21,7 +21,12 @@ const UsersList = ({admin, getAllUsers}) => {
     }
 
     useEffect(() => {
-        getAllUsers(query);
+        if(user.role === 'student_relations')
+            getAllStudents(query);
+        else if(user.role === 'alumni_relations')
+            getAllAlumni(query);
+        else
+            getAllUsers(query);
     },[query]);
 
     return (
@@ -50,7 +55,8 @@ UsersList.propTypes = {
 }
 
 const mapStateToProps = state => ({
+    user:state.auth.user,
     admin: state.admin
 });
 
-export default connect(mapStateToProps, {getAllUsers})(UsersList);
+export default connect(mapStateToProps, {getAllUsers, getAllStudents, getAllAlumni})(UsersList);

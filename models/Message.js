@@ -13,7 +13,16 @@ const MessageSchema = new mongoose.Schema({
     },
     subject:String,
     body:{type:String, required: true},
-    date:{type:Date, default:Date.now}
+    date:{type:Date, default:Date.now},
+    thread:[{
+        body:{type:String, required: true},
+        sender: {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"user",
+            required: true
+        },
+        date:{type:Date, default:Date.now}
+    }]
 });
 
 

@@ -1,7 +1,20 @@
 import React, {useRef, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
-import bhabhaLogo from "./companyLogos/bhabha.png";
+import isro from "../../assests/companies_logo/isro.png";
+import borl from "../../assests/companies_logo/borl.png";
+import bosch from "../../assests/companies_logo/bosch.jpg";
+import csir from "../../assests/companies_logo/csir.png";
+import hc from "../../assests/companies_logo/hc.jpg";
+import ibm from "../../assests/companies_logo/ibm.jpg";
+import ms from "../../assests/companies_logo/ms.png";
+import nhai from "../../assests/companies_logo/nhai.png";
+import ntpc from "../../assests/companies_logo/ntpc.png";
+import nokia from "../../assests/companies_logo/nokia.png";
+import tcs_tata from "../../assests/companies_logo/tcs-tata.jpg";
+import wipro from "../../assests/companies_logo/wipro-logo.png";
+import barc from "../../assests/companies_logo/barc.png";
+
 
 const CompanyShowcase = props => {
 
@@ -48,34 +61,57 @@ const CompanyShowcase = props => {
             <p>Our Alumni Connections</p>
             <div ref={showcaseRef} className="companies">
                 <div className="company">
-                    <img src={bhabhaLogo} alt="bhabha"/>
-                    <span>Bhabha</span>
+                    <img src={isro} alt="isro"/>
+                    <span>ISRO</span>
                 </div>
                 <div className="company">
-                    <img src={bhabhaLogo} alt="bhabha"/>
-                    <span>Bhabha</span>
+                    <img src={borl} alt="borl"/>
+                    <span>BORL</span>
                 </div>
                 <div className="company">
-                    <img src={bhabhaLogo} alt="bhabha"/>
-                    <span>Bhabha</span>
+                    <img src={bosch} alt="bosch"/>
+                    <span>BOSCH</span>
                 </div>
                 <div className="company">
-                    <img src={bhabhaLogo} alt="bhabha"/>
-                    <span>Bhabha</span>
+                    <img src={csir} alt="csir"/>
+                    <span>CSIR</span>
                 </div>
                 <div className="company">
-                    <img src={bhabhaLogo} alt="bhabha"/>
-                    <span>Bhabha</span>
+                    <img src={hc} alt="hc"/>
+                    <span>HC</span>
                 </div>
                 <div className="company">
-                    <img src={bhabhaLogo} alt="bhabha"/>
-                    <span>Bhabha</span>
+                    <img src={ibm} alt="ibm"/>
+                    <span>IBM</span>
                 </div>
                 <div className="company">
-                    <img src={bhabhaLogo} alt="bhabha"/>
-                    <span>Bhabha</span>
+                    <img src={ms} alt="ms"/>
+                    <span>Maruti</span>
                 </div>
-             
+                <div className="company">
+                    <img src={nhai} alt="nhai"/>
+                    <span>NHAI</span>
+                </div>
+                <div className="company">
+                    <img src={nokia} alt="nokia"/>
+                    <span>NOKIA</span>
+                </div>
+                <div className="company">
+                    <img src={ntpc} alt="ntpc"/>
+                    <span>NTPC</span>
+                </div>
+                <div className="company">
+                    <img src={tcs_tata} alt="tcs"/>
+                    <span>TCS</span>
+                </div>
+                <div className="company">
+                    <img src={wipro} alt="wipro"/>
+                    <span>Wipro</span>
+                </div>
+                <div className="company">
+                    <img src={barc} alt="barc"/>
+                    <span>BARC</span>
+                </div>
             </div>
         </div>
     )

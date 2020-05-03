@@ -1,12 +1,11 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from "react-redux";
-import {sendMessage} from "../../actions/message";
+import {sendReply} from "../../actions/message";
 
-const MessageForm = props => {
+const ReplyForm = props => {
 
     const [formData, setFormData] = useState({
-        subject:"",
         body:""
     });
     const onChange = e => {
@@ -15,23 +14,15 @@ const MessageForm = props => {
 
     const onSubmit = e => {
         e.preventDefault();
-
         const data = {...formData};
-        if(data.subject === "")
-            delete data['subject'];
-        props.sendMessage({...data, to:props.to.id});
+        props.sendReply(props.msg._id,data);
         
     }
     return (
 
         <div className="message-form py-1">
-            <p className="lead text-primary">Send Message</p>
+            <p className="lead text-primary">Send Reply</p>
             <form className="form" onSubmit={onSubmit}>
-
-                <div className="form-group">
-                    <input type="text" name="subject" placeholder="subject"
-                    onChange ={onChange}/>
-                </div>
                 <div className="form-group">
                     <textarea type="text" name="body" rows="5" cols="30" value={formData.body} 
                     placeholder="Your message..."
@@ -46,12 +37,14 @@ const MessageForm = props => {
     )
 }
 
-MessageForm.propTypes = {
+ReplyForm.propTypes = {
     submitting: PropTypes.bool.isRequired,
+    msg: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-    submitting: state.auth.submitting,
+    submitting: state.auth.submitting
 });
 
-export default connect(mapStateToProps, {sendMessage})(MessageForm);
+export default connect(mapStateToProps, {sendReply})(ReplyForm);
