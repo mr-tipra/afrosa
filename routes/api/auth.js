@@ -35,7 +35,7 @@ router.post("/register",[
             password,
             email,
             role,
-            enroll_no
+            enroll_no   
         });
         const errors = user.validateSync();
         if(errors){
@@ -86,10 +86,9 @@ router.post("/login",[
     
     
     const {password, enroll_no} = req.body;
-    console.log(req.body);
     try{
         //check user
-        const user = await User.findOne({enroll_no}).select("+password");
+        const user = await User.findOne({enroll_no: enroll_no.toLowerCase()}).select("+password");
         if(!user)
              return next(new ErrorResponse("Invalid credentials", 401, ERROR_INVALID_INPUT));
              
@@ -293,8 +292,6 @@ const sendTokenResponse = (user, statusCode, res) =>{
             token
         });
 };
-
-
 
 
 
