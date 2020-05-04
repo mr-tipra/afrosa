@@ -57,7 +57,7 @@ const Navbar = (props) => {
         <ul ref={navRef}>
             <li><Link to="/dashboard" onClick={toggleNav}><i className="fas fa-user"></i>Dashboard</Link></li>
             <li><Link to="/profiles" onClick={toggleNav}><i className="fas fa-list"></i>Profiles</Link></li>
-            <li><Link to="/maps/companies" onClick={toggleNav}><i className="fas fa-map-marker"></i>Alumni on Map</Link></li>
+            <li><Link to="/maps/companies" onClick={toggleNav}><i className="fas fa-map-marker"></i>Map</Link></li>
             <li><Link to="/posts" onClick={toggleNav}><i className="fas fa-newspaper"></i>Posts</Link></li>
             <li className="messages">
                 <Link to="/messages" onClick={toggleNav}>

@@ -11,7 +11,9 @@ const ProfileItem = props => {
 
     return (
         <div className="profile bg-light">
-            <ProfileImage image={profile.display_picture} check={isAdmin}/>
+            <div>
+                <ProfileImage image={profile.display_picture} check={isAdmin}/>
+            </div>
             <div>
                 <h2>{user.name}</h2>
                 <h2>{user.role}</h2>
