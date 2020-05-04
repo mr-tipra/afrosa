@@ -1,16 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {connect} from "react-redux";
 
 import defaultImage from "../../assests/default.png";
 
-const ProfileImage = ({image}) => {
+const ProfileImage = ({image, check}) => {
     return (
-            <img className="round-image my-1" src={image === "default" ? defaultImage:image } width="200px" alt="profile"/>            
+            <div className="profile-image">
+                {check &&  <i className="far fa-check-circle"></i> }
+                <img className="round-image my-1" src={image === "default" ? defaultImage:image } width="200px" alt="profile"/>            
+            </div>
     )
 }
 
 ProfileImage.propTypes = {
-    image: PropTypes.string.isRequired
+    image: PropTypes.string.isRequired,
+    check: PropTypes.bool
+
 }
 
-export default ProfileImage
+
+export default ProfileImage;

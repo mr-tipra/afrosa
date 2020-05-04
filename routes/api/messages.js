@@ -39,7 +39,6 @@ router.post("/", [protect, collegeVerified,
         const fromBlocklist = currUser.blocklist || [];
         const toBlocklist = user.blocklist || [];
 
-        console.log(fromBlocklist, toBlocklist, from, to);
         if(fromBlocklist && (fromBlocklist.findIndex(u => u.toString()===to.toString()) !== -1))
             return next(new ErrorResponse("blocked_user", 401, ERROR_INVALID_INPUT));
 
@@ -50,6 +49,11 @@ router.post("/", [protect, collegeVerified,
         const msg = await Message.create({
             from, to:toId, subject, body
         });
+        user.newMessage = true;
+        user.save(err => {
+
+        });
+
         return res.status(200).json({success:true, msg});
     }catch(err){
         console.log(err);
@@ -100,6 +104,11 @@ router.post("/:mid", [protect, collegeVerified,
             sender, body
         });
         await msg.save();
+        toUser.newMessage = true;
+        toUser.save(err => {
+
+        });
+
         return res.status(200).json({success:true, msg});
     }catch(err){
         console.log(err);
@@ -179,6 +188,5 @@ router.delete("/block/:uid", [protect, collegeVerified], async (req, res, next) 
         return next(err);
     }
 });
-
 
 module.exports = router;

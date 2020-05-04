@@ -37,7 +37,8 @@ const UserSchema = new mongoose.Schema({
         unique:true,
         required: [true,"Please enter enrollment number"]
     },
-    blocklist: [{type:mongoose.Schema.Types.ObjectId, ref:"user"}]
+    blocklist: [{type:mongoose.Schema.Types.ObjectId, ref:"user"}],
+    newMessage:{type:Boolean, default:false}
 });
 
 //encrypt pass with brcypt

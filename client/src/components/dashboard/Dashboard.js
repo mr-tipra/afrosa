@@ -16,7 +16,9 @@ const Dashboard = props => {
     useEffect(() => {
        props.getCurrentProfile();
     }, []);
-    
+    const user = props.auth.user || {};
+
+    const isAdmin = ['admin', 'student_relations','alumni_relations'].includes(user.role);
     return props.profile.loading && props.profile.profile === null ?<Spinner />:
 
     <section className="container">
@@ -27,7 +29,7 @@ const Dashboard = props => {
             {props.auth.user && !props.auth.user.college_verified && <p className="lead bg-danger p-1">Not college Verified</p>}
             
             <div className="dash-image bg-light">
-                <ProfileImage image = {props.profile.profile.display_picture} />
+                <ProfileImage image = {props.profile.profile.display_picture} check={isAdmin} />
                 <DashboardActions/>
             </div>
             <Experience experiences={props.profile.profile.experiences}/>

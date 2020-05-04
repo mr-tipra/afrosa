@@ -5,6 +5,7 @@ import Spinner from '../layout/Spinner';
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import SpinnerImage from "../../assests/spinner.svg";
+import  defaultImage from "../../assests/default.png";
 
 const CompaniesMap = props => {
 
@@ -80,7 +81,8 @@ const CompaniesMap = props => {
 
                     const divLeft = document.createElement("div");
                     divLeft.classList.add("left");
-                    divLeft.innerHTML += `<img src='${res.data.profile.display_picture}'/>`
+                    const isDefault = res.data.profile.display_picture === "default";
+                    divLeft.innerHTML += `<img src='${isDefault?defaultImage:res.data.profile.display_picture}'/>`
                     
                     const divRight = document.createElement("div");
                     divRight.classList.add("right");

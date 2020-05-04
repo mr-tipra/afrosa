@@ -7,10 +7,11 @@ import ProfileImage from "../profile/ProfileImage";
 const ProfileItem = props => {
     const profile = props.profile;
     const user = props.profile.user;
+    const isAdmin = ['admin', 'student_relations','alumni_relations'].includes(user.role);
 
     return (
         <div className="profile bg-light">
-            <ProfileImage image={profile.display_picture}/>
+            <ProfileImage image={profile.display_picture} check={isAdmin}/>
             <div>
                 <h2>{user.name}</h2>
                 <h2>{user.role}</h2>

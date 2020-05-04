@@ -1,14 +1,15 @@
 import React,{useEffect, Fragment, useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from "react-redux";
-import {getMessages, addToBlocklist, removeFromBlocklist} from "../../actions/message";
+import {getMessages, addToBlocklist, removeFromBlocklist, seenMessages} from "../../actions/message";
 import Spinner from "../layout/Spinner";
 import MessageItem from "./MessageItem";
 
-const MessageList = ({message, getMessages, user, addToBlocklist, removeFromBlocklist, submitting}) => {
+const MessageList = ({message, getMessages, user, addToBlocklist, removeFromBlocklist, seenMessages,  submitting}) => {
 
     useEffect(() => {
         getMessages();
+        seenMessages();
     }, []);
 
     const [sentMessages, setSentMessages] = useState([]);
@@ -70,4 +71,4 @@ const mapStateToProps = state => ({
     submitting: state.auth.submitting
 });
 
-export default connect(mapStateToProps, {getMessages, addToBlocklist, removeFromBlocklist})(MessageList);
+export default connect(mapStateToProps, {getMessages, addToBlocklist, removeFromBlocklist, seenMessages})(MessageList);

@@ -59,7 +59,14 @@ const Navbar = (props) => {
             <li><Link to="/profiles" onClick={toggleNav}><i className="fas fa-list"></i>Profiles</Link></li>
             <li><Link to="/maps/companies" onClick={toggleNav}><i className="fas fa-map-marker"></i>Alumni on Map</Link></li>
             <li><Link to="/posts" onClick={toggleNav}><i className="fas fa-newspaper"></i>Posts</Link></li>
-            <li><Link to="/messages" onClick={toggleNav}><i className="fas fa-envelope"></i>Messages</Link></li>
+            <li className="messages">
+                <Link to="/messages" onClick={toggleNav}>
+
+                    <i className="fas fa-envelope">
+                        {//only when new message
+                        props.auth.user && props.auth.user.newMessage === true && <span className="notify"></span>}
+                        </i>Messages</Link>
+            </li>
 
             {//admin only
             !props.auth.loading && props.auth.user && (props.auth.user.role === "admin" ||

@@ -255,6 +255,21 @@ router.put("/resetpassword/:token", async (req, res, next) =>{
     }
 });
 
+//seen messages
+router.put("/seen_messages", [protect], async (req, res, next) => {
+
+    try{
+
+        const user = await User.findById(req.user.id);
+        //update messages seen
+        user.newMessage = false;
+        await user.save();
+        return res.status(200).json({success: true});
+
+    }catch(err){
+        return next(err);
+    }
+});
 
 // HELPERS
 //Get token from model, create cookie and send resp

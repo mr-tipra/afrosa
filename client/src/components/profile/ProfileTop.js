@@ -5,10 +5,10 @@ import ProfileImage from "./ProfileImage";
 const ProfileTop = props => {
     const profile = props.profile;
     const user = props.profile.user;
-
+    const isAdmin = ['admin', 'student_relations','alumni_relations'].includes(user.role);
     return (
         <div className="profile-top bg-primary p-2">
-            <ProfileImage image={profile.display_picture} />
+            <ProfileImage image={profile.display_picture} check={isAdmin} />
             <h1 className="large">{profile.user.name}</h1>
             <p className="lead">{user.role.toUpperCase()} joined UEC in {profile.batch}, {profile.branch.toUpperCase()}</p>
             {profile.addr &&  profile.addr.state && 

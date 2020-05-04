@@ -9,7 +9,9 @@ import {
     MESSAGE_SENT,
     REPLY_SENT,
     ADD_TO_BLOCKLIST,
-    REMOVE_FROM_BLOCKLIST
+    REMOVE_FROM_BLOCKLIST,
+    SEEN_MESSAGES,
+    AUTH_ERROR
 } from "./types";
 
 
@@ -168,3 +170,19 @@ export const removeFromBlocklist = (uid) => async dispatch => {
         });
     }
 }
+
+
+// seen mesage
+export const seenMessages = () => async dispatch => {
+
+    try{
+
+        const res  = await axios.put("/api/auth/seen_messages");
+        dispatch({
+            type: SEEN_MESSAGES
+        });
+
+    }catch(err){
+       
+    }
+};

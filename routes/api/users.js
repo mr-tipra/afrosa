@@ -69,7 +69,7 @@ router.get("/students", [protect, authorize('admin', 'student_relations','alumni
 router.get("/alumni", [protect, authorize('admin', 'student_relations','alumni_relations')], async (req, res, next) =>{
        try{
               
-              const users = await User.find({...req.query, role:'alumni'});
+              const users = await User.find({...req.query, role:'alumnus'});
               return res.status(200).json({success:true, users});
        }catch(err){
               return next(err);

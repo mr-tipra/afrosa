@@ -18,17 +18,17 @@ const Footer = () => {
                 <h2>Contact Us</h2>
                 <div className="contacts">
                     <div className="contact">
-                        <p>Head</p>
+                        <p>Mentor</p>
+                        <p>Administrator</p>
+                        <p>Contact</p>
+                    </div>
+                    <div className="contact">
+                        <p>Student Relations</p>
                         <p>Position</p>
                         <p>Contact</p>
                     </div>
                     <div className="contact">
-                        <p>Head</p>
-                        <p>Position</p>
-                        <p>Contact</p>
-                    </div>
-                    <div className="contact">
-                        <p>Head</p>
+                        <p>Alumni Relations</p>
                         <p>Position</p>
                         <p>Contact</p>
                     </div>
