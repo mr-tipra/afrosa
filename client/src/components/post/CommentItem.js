@@ -13,7 +13,7 @@ const CommentItem = ({
     deleteComment
 }) => {
     return (
-        <div className="post bg-dark my-1">
+        <div className="post bg-dark my-1 comment">
             <div>
                 <Link to={`/profile/${comment.user}`}>
                     <ProfileImage image ={comment.avatar} />

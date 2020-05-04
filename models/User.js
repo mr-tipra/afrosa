@@ -35,6 +35,7 @@ const UserSchema = new mongoose.Schema({
     enroll_no:{
         type:String,
         unique:true,
+        lowercase: true,
         required: [true,"Please enter enrollment number"]
     },
     blocklist: [{type:mongoose.Schema.Types.ObjectId, ref:"user"}],

@@ -397,6 +397,11 @@ img{
             
         }
     }
+    &.comment > div:first-child{
+        img{
+            width: 100%;
+        }
+    }
 
     .tags{
         margin: 0.5rem 0;

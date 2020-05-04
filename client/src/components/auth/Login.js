@@ -17,8 +17,7 @@ const Login = (props) => {
 
     const onSubmit = async (e) =>{
         e.preventDefault();
-
-        props.login({enroll_no, password});
+        props.login({enroll_no: enroll_no.toLowerCase(), password});
         
     }
 
