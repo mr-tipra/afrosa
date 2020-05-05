@@ -20,7 +20,7 @@ router.get("/stats", async (req, res, next) => {
 
        try{
               const students = await User.countDocuments({role:"student"});
-              const alumni = await User.countDocuments({role:"alumni"});
+              const alumni = await User.countDocuments({role:"alumnus"});
               const companies = await Comapany.countDocuments();
               return res.status(200).json({success: true, stats:{students,alumni, companies}});
        }catch(err){

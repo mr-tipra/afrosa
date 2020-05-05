@@ -76,7 +76,7 @@ const Profiles = props => {
 
     return (
         <section className="container">
-            <form className="form-search" >
+            <form className="form-search" onSubmit = {e => e.preventDefault() }>
                 <div className="form-group">
                     <input type="text" name="name" placeholder="Search User By Name..." 
                     value={search.name} onChange={onChange}/>
