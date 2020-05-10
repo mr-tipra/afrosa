@@ -6,6 +6,12 @@ import {verifyUser, deleteUser} from "../../actions/admin";
 
 const ProfileItemAdmin = ({user, verifyUser, deleteUser}) => {
 
+    const onClickDelete = e => {
+        const del = window.confirm("Are you sure about deleting this account?");
+        if(del)
+            deleteUser(user.enroll_no);
+        
+    }
     return (
         <div className="profile-admin bg-light">            
             
@@ -20,7 +26,7 @@ const ProfileItemAdmin = ({user, verifyUser, deleteUser}) => {
             <h2>{user.role}</h2>
             <h2>{user.enroll_no}</h2>
             <Link className="btn btn-primary" to={`/profile/${user._id}`}>View Profile</Link>
-            <button className="btn btn-danger my-1" onClick={e => deleteUser(user.enroll_no)}>Delete</button>
+            <button className="btn btn-danger my-1" onClick={onClickDelete}>Delete</button>
             {!user.college_verified && <button className="btn btn-danger my-1" onClick={e => verifyUser(user.enroll_no)}>Verify User</button> }
 
         </div>

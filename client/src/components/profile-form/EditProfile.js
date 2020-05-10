@@ -96,9 +96,11 @@ const EditProfile = props => {
     const submitFile = e => {
         e.preventDefault();
         if(file === "" )
-        props.setAlert("No file selected");
+            props.setAlert("No file selected");
         else if(!file.type.startsWith("image"))
-        props.setAlert("Invalid file selected");
+            props.setAlert("Invalid file selected");
+        else if(file.size > 1000000)
+            props.setAlert("File size should not exceed 1MB");
         else{
             setUploadPercent(0);
             props.updateProfilePicture(file, setUploadPercent);
@@ -125,6 +127,7 @@ const EditProfile = props => {
                     <ProfileImage image={props.profile.profile.display_picture} />
                     <input className="btn" type="file" onChange={onFileChange}/>
                     <button className="btn btn-primary my-1"  onClick={submitFile}>Update Image </button>
+                    <small>Max size allowed 1MB</small>
                     {uploadPercent > 0 && <p>Upload %: {uploadPercent}</p>}
                 </div>
 

@@ -25,11 +25,11 @@ const ProfileTop = props => {
             {profile.social && 
             <div className="icons my-1">
                 <h4>Social Links</h4>
-                {profile.social.twitter && <a target="_blank" href={profile.social.twitter}><i className="fab fa-twitter"></i></a>}
-                {profile.social.facebook && <a target="_blank" href={profile.social.facebook}><i className="fab fa-facebook"></i></a>}
-                {profile.social.youtube && <a target="_blank" href={profile.social.youtube}><i className="fab fa-youtube"></i></a>}
-                {profile.social.instagram && <a target="_blank" href={profile.social.instagram}><i className="fab fa-instagram"></i></a>}
-                {profile.social.linkedin && <a target="_blank" href={profile.social.twitter}><i className="fab fa-twitter"></i></a>}
+                {profile.social.twitter && <a target="_blank" href={"http://www.twitter.com/" + profile.social.twitter}><i className="fab fa-twitter"></i></a>}
+                {profile.social.facebook && <a target="_blank" href={"http://www.facebook.com/" + profile.social.facebook}><i className="fab fa-facebook"></i></a>}
+                {profile.social.youtube && <a target="_blank" href={"http://www.youtube.com/user/" + profile.social.youtube}><i className="fab fa-youtube"></i></a>}
+                {profile.social.instagram && <a target="_blank" href={"http://www.instagram.com/" + profile.social.instagram}><i className="fab fa-instagram"></i></a>}
+                {profile.social.linkedin && <a target="_blank" href={"http://www.linkedin.com/in/" + profile.social.linkedin}><i className="fab fa-linkedin"></i></a>}
             </div>}
         </div>
     )

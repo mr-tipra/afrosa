@@ -41,7 +41,7 @@ const Experience = props => {
     return (
         <Fragment>
             <div className="form-group">
-                <input type="text" name="title" placeholder="*Title" value={title} 
+                <input type="text" name="title" placeholder="*Title (Internship, Job, Events and others activities)" value={title} 
                 onChange = {e => onChange(e)}
                 required/>
             </div>
