@@ -40,7 +40,7 @@ router.get("/", [protect, authorize('admin')], async (req, res, next) =>{
               
               const users = await User.find({
                      ...req.query,
-                     '$or':[{role:'student'}, {role:'alumni'}]
+                     '$or':[{role:'student'}, {role:'alumnus'}]
               });
               return res.status(200).json({success:true, users});
        }catch(err){
