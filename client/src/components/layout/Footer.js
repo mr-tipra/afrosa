@@ -20,17 +20,17 @@ const Footer = () => {
                     <div className="contact">
                         <p>Mentor</p>
                         <p>Administrator</p>
-                        <p>Contact</p>
+                        <p>mentor.afrosa@gmail.com</p>
                     </div>
                     <div className="contact">
-                        <p>Student Relations</p>
-                        <p>Position</p>
-                        <p>Contact</p>
+                        <p>Feedback</p>
+                        <p>Feedback Department</p>
+                        <p>feedbackafrosa@gmail.com</p>
                     </div>
                     <div className="contact">
                         <p>Alumni Relations</p>
-                        <p>Position</p>
-                        <p>Contact</p>
+                        <p>Alumni Department</p>
+                        <p>alumnirelations.afrosa@gmail.com</p>
                     </div>
                 </div>
             </div>

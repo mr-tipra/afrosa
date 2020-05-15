@@ -171,7 +171,7 @@ const EditProfile = props => {
                 {displaySocialInputs && 
                 <Fragment>
                         <div className="form-group social-input">
-                        <i className="fab fa-facebook"></i>
+                        <i className="fab fa-youtube"></i>
                         <input type="text" placeholder="youtube" name="youtube" 
                         value={youtube} onChange={e => onChange(e)}/>
                     </div>
