@@ -15,6 +15,7 @@ const Map = props => {
             const map= new Map({
                 basemap:"dark-gray-vector"
             });
+
             const view= new Mapview({
                 container: mapRef.current,
                 map:map,
@@ -30,7 +31,6 @@ const Map = props => {
             search.on("search-complete", (res) => {
                 const geom = res.results[0].results[0].feature.geometry;
                 const data = {addr_line: res.searchTerm, geoData:{coordinates:[geom.longitude, geom.latitude]}};
-
                 props.onEnter(data);
             });
 

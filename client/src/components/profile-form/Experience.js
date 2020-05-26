@@ -6,6 +6,7 @@ import Map from "./Map";
 const Experience = props => {
     const [fields, setFields] = useState({
        title:"" ,
+       company_name:"",
        addr:{},
        from:"",
        to:"",
@@ -14,6 +15,7 @@ const Experience = props => {
 
     const {
         title,
+        company_name,
         from,
         addr,
         to,
@@ -22,7 +24,7 @@ const Experience = props => {
     
     useEffect(()=>{
         props.onChange(fields);
-    }, [title, from, to, addr, desc]);
+    }, [title, from, to, addr, desc, company_name]);
     
   
     const [mapAddr, setMapAddr] = useState({});
@@ -42,6 +44,12 @@ const Experience = props => {
         <Fragment>
             <div className="form-group">
                 <input type="text" name="title" placeholder="*Title (Internship, Job, Events and others activities)" value={title} 
+                onChange = {e => onChange(e)}
+                required/>
+            </div>
+
+            <div className="form-group">
+                <input type="text" name="company_name" placeholder="*Company Name" value={company_name} 
                 onChange = {e => onChange(e)}
                 required/>
             </div>

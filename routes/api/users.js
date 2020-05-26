@@ -98,12 +98,21 @@ router.delete("/:eno", [protect, authorize('admin',"alumni_relations","student_r
                                    //delete
                                    if(user.role === "student")
                                           company.students--;
-                                   else if(user.role === "alumni")
+                                   else if(user.role === "alumnus")
                                           company.alumni--;
+                                          
                                    if(company.students<=0 && company.alumni <= 0)
                                           await company.delete();
-                                   else
+                                   else{
+                                          //update newest field
+                                          const newNewest = await Profile.find({'experiences.company':company._id});
+                                          if(newNewest && newNewest.length > 0){
+                                                 const newest = newNewest.find(u => u.user.toString() !== company.newest.toString());
+                                                 company.newest = newest._id;
+                                          }
+
                                           await company.save();
+                                   }
                             }
                      });
                      await profile.remove();

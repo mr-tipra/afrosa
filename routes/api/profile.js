@@ -142,7 +142,7 @@ router.get("/:uid", [protect,collegeVerified], async (req, res,next) => {
 
        try{
               let profile = await Profile.findOne({user:req.params.uid}).populate("user",
-           populateQuery).populate("experinces.company");
+           populateQuery).populate("experiences.company");
            if(!profile)
               return next(new ErrorResponse("No profile found", 400, ERROR_INVALID_INPUT));
            return res.status(200).json({success:true, profile});
@@ -156,6 +156,7 @@ router.get("/:uid", [protect,collegeVerified], async (req, res,next) => {
 //@acesss Private
 router.put("/experiences", [protect,[
        check("title","Please enter valid title").exists(),
+       check("company_name","Please enter Company Name").exists(),
        check("from", "Please enter beginning date").exists(),
        check("addr", "Please enter address").exists()
 
@@ -172,14 +173,16 @@ router.put("/experiences", [protect,[
                      addr,
                      from,
                      to,
-                     desc
+                     desc,
+                     company_name
               } = req.body;
 
               const newExp = {
                      title,
                      from,
                      to,
-                     desc
+                     desc,
+                     company_name
               };
               //find the company
 
@@ -191,10 +194,11 @@ router.put("/experiences", [protect,[
               //calulate radius using radians
               //Divide distance by radius of earth
               //earth radius = 6378 km
-              const radius = 10/6378; //search within 10 kms
+              const radius = 1/6378; //search within 1 kms
               const companies = await Company.find({
                      geoData: { '$geoWithin': {'$centerSphere': [addr.geoData.coordinates, radius]}}
               });
+
               if(companies.length === 0){
                      //new company
                      const company = new Company({
@@ -202,7 +206,7 @@ router.put("/experiences", [protect,[
                             name: addr.addr_line.split(",")[0],
                             geoData:addr.geoData,
                             students:profile.user_role==="student"?1:0,
-                            alumni:profile.user_role==="alumni"?1:0,
+                            alumni:profile.user_role==="alumnus"?1:0,
                             newest: req.user.id
                      });
                      await company.save();
@@ -245,11 +249,11 @@ router.delete("/experiences/:id", protect,async(req, res, next) => {
                      //found company
                      if(profile.user_role === "student")
                             company.students--;
-                     else if(profile.user_role === "alumni")
+                     else if(profile.user_role === "alumnus")
                             company.alumni--;
                      
                      if(company.students<=0 && company.alumni<=0){
-                            console.log("deleting");
+                        
                             Company.deleteOne({_id:company._id}, err => {
                                    if(err) console.log(err);
                             });

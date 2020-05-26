@@ -71,7 +71,8 @@ const CompaniesMap = props => {
                     
                     //get exp
                     const profile = res.data.profile;
-                    const exp = profile.experiences.find(exp => exp.company === atts.company_id);
+                    console.log(profile.experiences);
+                    const exp = profile.experiences.find(exp => exp.company._id === atts.company_id);
                     const divUser = document.createElement("div");
                     divUser.classList.add("map-popup-user");
                     //redirect on click
@@ -87,8 +88,8 @@ const CompaniesMap = props => {
                     const divRight = document.createElement("div");
                     divRight.classList.add("right");
                     divRight.innerHTML += `<p>${atts.user_name}</p>`;
-                    divRight.innerHTML += `<p>${exp.title} <span class='text-primary'>at</span> ${atts.name}</p>`;
-                    divRight.innerHTML += `<p><span class='text-primary'>Joined in</span> in ${new Date(exp.from).getFullYear()}</p>`;
+                    divRight.innerHTML += `<p>${exp.title} <span class='text-primary'>at</span> ${exp.company_name || atts.name}</p>`;
+                    divRight.innerHTML += `<p><span class='text-primary'>Joined in</span> ${new Date(exp.from).getFullYear()}</p>`;
 
                     divUser.insertBefore(divRight, null);
                     divUser.insertBefore(divLeft, divRight);
@@ -118,7 +119,6 @@ const CompaniesMap = props => {
                 }
             });
 
-            console.log(companies);
             companies.forEach(comp => {
 
                 const attributes = {

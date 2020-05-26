@@ -44,6 +44,7 @@ const ProfileSchema = new mongoose.Schema({
         {
             title:{type:String, required: true},
             company: {type:mongoose.Schema.Types.ObjectId, ref:"company"},
+            company_name:{type:String},
             from:{type:Date, required:true},
             to:Date,
             desc:String
