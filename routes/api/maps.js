@@ -16,14 +16,23 @@ const Company = require("../../models/Company");
 router.get("/companies", [protect, collegeVerified], async (req, res, next) =>{
        
        try{
-            const companies = await Company.find().populate("newest",["name"]);
-            
+            const companies = await Company.find().populate("newest",["name"]).populate("members",["name"]).lean(true);
+       
+              //unique members
+              companies.forEach(comp => {
+                     comp.total = comp.members.filter((val, index) => {
+                            return comp.members.indexOf(val) === index;
+                     }).length;
+              });
+              
             return res.status(200).json({success: true, companies})
               
        }catch(err){
               return next(err);
        }
 });
+
+
 
 
 

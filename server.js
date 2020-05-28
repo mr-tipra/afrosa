@@ -36,6 +36,7 @@ app.use("/api/profile", require("./routes/api/profile"));
 app.use("/api/posts", require("./routes/api/posts"));
 app.use("/api/messages", require("./routes/api/messages"));
 app.use("/api/maps", require("./routes/api/maps"));
+app.use("/api/companies", require("./routes/api/companies"));
     
 //set static folder
 app.use(express.static(path.join(__dirname, "public")));

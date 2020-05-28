@@ -141,6 +141,14 @@
             }
         }
     }
+
+    //company page
+.company{
+    &-members{
+        grid-template-columns: 1fr;
+       
+    }
+}
     //footer
     .page-container{
         padding-bottom: $footer-height-small;

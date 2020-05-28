@@ -633,6 +633,38 @@ html,body{
         }
     }
 }
+
+//company page
+.company{
+    &-header{
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 0;
+        margin: 0.5rem 0;
+        background: #eee;
+    }
+    &-members{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap:0.5rem;
+        .member{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            cursor: pointer;
+            transition: background 0.2s ease-in;
+            &:hover{
+                background:$dark-color;
+                color: white;
+
+            }
+        }
+    }
+}
+
 //site loader
 .site-loader {
     background-color: #20282c;

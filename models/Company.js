@@ -12,6 +12,8 @@ const CompanySchema = new mongoose.Schema({
     alumni:{type:Number, default:0},
 
     newest:{type:mongoose.Schema.Types.ObjectId,ref:"user"},
+    members:[{type: mongoose.Schema.Types.ObjectId, ref:"user"}],
+    
     geoData:{
         type:{type:String, enum:["Point"], default:"Point",required: true},
         coordinates:{type:[Number], required: true }

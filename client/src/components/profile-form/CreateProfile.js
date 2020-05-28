@@ -149,6 +149,7 @@ const CreateProfile = props => {
                 </div>
                 {displaySocialInputs && 
                 <Fragment>
+                    <span>Usernames Only*</span>
                     <div className="form-group social-input">
                         <i className="fab fa-facebook"></i>
                         <input type="text" placeholder="youtube" name="youtube" 

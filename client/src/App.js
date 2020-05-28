@@ -28,6 +28,7 @@ import Post from "./components/post/Post";
 
 import MessageList from "./components/messages/MessageList";
 import Teams from "./components/team/Teams";
+import Company from "./components/company/Company";
 
 //Reset Password
 import ForgotPassword from "./components/auth/ForgotPassword";
@@ -107,6 +108,7 @@ function App() {
             <PrivateRouteVerified exact path="/posts" component={Posts} />
             <PrivateRouteVerified exact path="/posts/:id" component={Post} />
             <PrivateRouteVerified exact path="/messages" component={MessageList} />
+            <PrivateRouteVerified exact path="/companies/:id" component={Company} />
             
             <PrivateRouteAdmin exact path="/admin/userslist" component={UsersList} />
           </Switch>

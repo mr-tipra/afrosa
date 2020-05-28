@@ -9,19 +9,11 @@ const PrivateRouteVerified = ({component:Component, setAlert,auth,profile,...res
 
     if(auth.user && !auth.user.college_verified)
         setAlert("Not College Verified", "danger");
-    
-    
-    // if(!profile.loading && profile.profile === null){
-    //     //check if own
-        
-    //     setAlert("Please Create Profile", "danger")
-    //     return <Redirect to="/dashboard" />;
-    // }
         
     return (
-        <Route {...rest} render={props=>!auth.isAuthenticated ||
+        <Route {...rest} render={props=>(!auth.isAuthenticated ||
             auth.loading ||
-            (auth.user && !auth.user.college_verified) ? (<Redirect to="/dashboard"/>):
+            !auth.user || !auth.user.college_verified) ? (<Redirect to="/dashboard"/>):
         (<Component {...props} />)} />
     );
 }

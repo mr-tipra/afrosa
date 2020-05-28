@@ -170,6 +170,7 @@ const EditProfile = props => {
                 </div>
                 {displaySocialInputs && 
                 <Fragment>
+                        <span className="m-1">Username Only*</span>
                         <div className="form-group social-input">
                         <i className="fab fa-youtube"></i>
                         <input type="text" placeholder="youtube" name="youtube" 

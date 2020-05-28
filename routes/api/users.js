@@ -105,11 +105,8 @@ router.delete("/:eno", [protect, authorize('admin',"alumni_relations","student_r
                                           await company.delete();
                                    else{
                                           //update newest field
-                                          const newNewest = await Profile.find({'experiences.company':company._id});
-                                          if(newNewest && newNewest.length > 0){
-                                                 const newest = newNewest.find(u => u.user.toString() !== company.newest.toString());
-                                                 company.newest = newest._id;
-                                          }
+                                          if(company.members)
+                                                 company.members = company.members.filter(mem => mem.toString() !== user._id.toString());
 
                                           await company.save();
                                    }
@@ -167,8 +164,6 @@ router.put("/collegeverify/:eno", [protect, authorize('admin',"student_relations
               return next(err);
        }
 });
-
-
 
 
 module.exports = router;

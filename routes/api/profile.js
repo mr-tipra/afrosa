@@ -207,7 +207,8 @@ router.put("/experiences", [protect,[
                             geoData:addr.geoData,
                             students:profile.user_role==="student"?1:0,
                             alumni:profile.user_role==="alumnus"?1:0,
-                            newest: req.user.id
+                            newest: req.user.id,
+                            members:[req.user.id]
                      });
                      await company.save();
                      newExp.company = company._id;
@@ -218,7 +219,11 @@ router.put("/experiences", [protect,[
                             companies[0].students++;
                      else
                             companies[0].alumni++;
-                     companies[0].newest = req.user._id;
+
+                     if(companies[0].members)
+                            companies[0].members.push(req.user.id);
+                     else
+                            companies[0].members = [req.user.id];
                      await Company.findByIdAndUpdate(companies[0]._id, {"$set":companies[0]});
                      newExp.company = companies[0]._id;
               }
@@ -251,7 +256,7 @@ router.delete("/experiences/:id", protect,async(req, res, next) => {
                             company.students--;
                      else if(profile.user_role === "alumnus")
                             company.alumni--;
-                     
+                     console.log(company.students);
                      if(company.students<=0 && company.alumni<=0){
                         
                             Company.deleteOne({_id:company._id}, err => {
@@ -259,6 +264,10 @@ router.delete("/experiences/:id", protect,async(req, res, next) => {
                             });
                      }
                      else{
+                            if(company.members)
+                                   company.members = company.members.filter(mem => mem.toString() !== req.user.id.toString());
+                            
+                           
                             company.save();
                      }
               });

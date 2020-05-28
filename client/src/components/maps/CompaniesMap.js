@@ -71,7 +71,7 @@ const CompaniesMap = props => {
                     
                     //get exp
                     const profile = res.data.profile;
-                    console.log(profile.experiences);
+                   
                     const exp = profile.experiences.find(exp => exp.company._id === atts.company_id);
                     const divUser = document.createElement("div");
                     divUser.classList.add("map-popup-user");
@@ -93,7 +93,7 @@ const CompaniesMap = props => {
 
                     divUser.insertBefore(divRight, null);
                     divUser.insertBefore(divLeft, divRight);
-                    
+
                     div.removeChild(div.children[0]);
                     div.insertBefore(divUser,div.firstChild);
                 })
@@ -101,8 +101,18 @@ const CompaniesMap = props => {
 
                 });
 
-                div.innerHTML += `<p>This company has ${atts.students} Students and ${atts.alumni} Alumni</span></p>`
-             
+                div.innerHTML += `<p>This company has ${atts.total} users</p>`
+                const link = document.createElement('span');
+                link.innerHTML = "See All";
+                link.addEventListener("click", e => {
+                    history.push(`/companies/${atts.company_id}`);
+                });
+                link.classList.add("btn");
+                link.classList.add("btn-primary");
+                
+                div.appendChild(link);
+                div.style="text-align:center";
+
                 return div;
             }
             
@@ -114,7 +124,6 @@ const CompaniesMap = props => {
             
             view.popup.on("trigger-action",e => {
                 if(e.action.id === gotoProfileAction.id){
-                    console.log(view.popup.selectedFeature.attributes.user_id);
                     history.push(`/profile/${view.popup.selectedFeature.attributes.user_id}`)
                 }
             });
@@ -125,9 +134,10 @@ const CompaniesMap = props => {
                     name: comp.name,
                     students:comp.students,
                     alumni: comp.alumni,
+                    total: comp.total,
                     addr: comp.formatted_adr,
-                    user_id: comp.newest._id,
-                    user_name:comp.newest.name,
+                    user_id: comp.members[comp.members.length-1]._id,
+                    user_name:comp.members[comp.members.length-1].name,
                     company_id: comp._id
                 };
                 
