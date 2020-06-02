@@ -159,9 +159,25 @@ img{
         align-items: center;
         justify-content: center;
         text-align: center;
+
+        p{
+            position:relative;
+            text-transform: uppercase;
+            font-size: 2rem;
+            // animation: colorAnimation 2s infinite alternate linear;
+        }
     }
 }
-
+@keyframes colorAnimation{
+    from {
+        color: white;
+        
+    }
+    to{
+        color: #EEB14F;
+       
+    }
+}
 
 //about us component
 .aboutus{
