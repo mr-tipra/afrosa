@@ -16,7 +16,7 @@ const Qualification = ({qualifications, deleteQualification, submitting}) => {
                     qual.to === null ? ('Now'):(<Moment format="YYYY">{qual.to}</Moment>)
                 }
             </td>
-            <td>{qual.desc && qual.desc !== ""? qual.desc:"None"}</td>
+            <td className="hide-sm">{qual.desc && qual.desc !== ""? qual.desc:"None"}</td>
             <td><button className="btn btn-danger" disabled={submitting} onClick={() =>deleteQualification(qual._id)}>Delete</button></td>
         </tr>
     ))
@@ -32,9 +32,9 @@ const Qualification = ({qualifications, deleteQualification, submitting}) => {
                 <thead>
                     <tr>
                         <th>Qualification</th>
-                        <th>College/School</th>
-                        <th>Years</th>
-                        <th>Desc</th>
+                        <th className="hide-sm">College/School</th>
+                        <th className="hide-sm">Years</th>
+                        <th className="hide-sm">Desc</th>
                         <th/>
                     </tr>
                 </thead>
