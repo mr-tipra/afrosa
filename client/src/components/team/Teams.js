@@ -83,8 +83,8 @@ const Teams = props => {
                     <li onClick={() => setActive(ORATORS)}>Orators</li>
                     <li onClick={() => setActive(DESIGN)}>Design</li>
                     <li onClick={() => setActive(SOCIAL_MEDIA)}>Social Media</li>
-                    <li onClick={() => setActive(CONTENT_WRITER)}>Cotent Writers</li>
-                    <li onClick={() => setActive(MEDIA_COORDINATOR)}>Media Coodinator</li>
+                    <li onClick={() => setActive(CONTENT_WRITER)}>Content Writers</li>
+                    <li onClick={() => setActive(MEDIA_COORDINATOR)}>Media Coordinator</li>
                 </ul>
             </div>
 
