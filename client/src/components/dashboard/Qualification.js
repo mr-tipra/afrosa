@@ -10,8 +10,8 @@ const Qualification = ({qualifications, deleteQualification, submitting}) => {
     const qualificationsList = qualifications.map(qual => (
         <tr key={qual._id}>
             <td>{qual.qualification}</td>
-            <td>{qual.institute}</td>
-            <td>
+            <td className="hide-sm">{qual.institute}</td>
+            <td className="hide-sm">
                 <Moment format="YYYY">{qual.from}</Moment> - {
                     qual.to === null ? ('Now'):(<Moment format="YYYY">{qual.to}</Moment>)
                 }
