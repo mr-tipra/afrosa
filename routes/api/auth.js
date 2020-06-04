@@ -88,7 +88,14 @@ router.post("/login",[
     const {password, enroll_no} = req.body;
     try{
         //check user
-        const user = await User.findOne({enroll_no: enroll_no.toLowerCase()}).select("+password");
+        let user = null;
+        
+        //check by email
+        console.log(enroll_no, password);
+        user = await User.findOne({email: enroll_no}).select("+password");
+        if(!user)
+            user = await User.findOne({enroll_no: enroll_no.toLowerCase()}).select("+password");
+
         if(!user)
              return next(new ErrorResponse("Invalid credentials", 401, ERROR_INVALID_INPUT));
              

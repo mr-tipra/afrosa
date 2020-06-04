@@ -30,7 +30,7 @@ const Login = (props) => {
             <form   className="form" onSubmit={e=>onSubmit(e)}>
          
                 <div className="form-group">
-                    <input type="text" placeholder="Enrollment No." name="enroll_no" 
+                    <input type="text" placeholder="Enrollment No./Ema  il" name="enroll_no" 
                     onChange={e=>onChange(e)} value={enroll_no}  required/>
                 </div>
                 <div className="form-group">
