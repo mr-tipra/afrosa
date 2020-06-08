@@ -74,7 +74,6 @@ const Teams = props => {
         <div className="container team">
             <div className="departments">
                 <ul>
-                    <li onClick={() => setActive(MENTORS)}>Mentor</li>
                     <li onClick={() => setActive(MANAGEMENT)}>Management</li>
                     <li onClick={() => setActive(WEB_DEV)}>Web Development</li>
 
@@ -90,20 +89,7 @@ const Teams = props => {
 
             <div className="team-members">
 
-                {active === MENTORS &&
-                    <div className={setActiveClass(MENTORS)}>
-                    <div className="member">
-                        <img src={principal} alt="pic"/>
-                    </div>
-                   
-                    <div className="member">
-                        <img src={dean} alt="pic"/>
-                    </div>
-                    <div className="member">
-                        <img src={mentor} alt="pic"/>
-                    </div>
-                </div>
-                }
+          
                 
                 {active === WEB_DEV &&
                 <div className={setActiveClass(WEB_DEV)}>
