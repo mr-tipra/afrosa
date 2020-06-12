@@ -152,27 +152,27 @@ const CreateProfile = props => {
                     <span>Usernames Only*</span>
                     <div className="form-group social-input">
                         <i className="fab fa-facebook"></i>
-                        <input type="text" placeholder="youtube" name="youtube" 
+                        <input type="text" placeholder="youtube (username only)" name="youtube" 
                         value={youtube} onChange={e => onChange(e)}/>
                     </div>
                     <div className="form-group social-input">
                         <i className="fab fa-twitter"></i>
-                        <input type="text" placeholder="twitter" name="twitter" 
+                        <input type="text" placeholder="twitter (username only)" name="twitter" 
                         value={twitter} onChange={e => onChange(e)}/>
                     </div>
                     <div className="form-group social-input">
                         <i className="fab fa-facebook"></i>
-                        <input type="text" placeholder="facebook" name="facebook" 
+                        <input type="text" placeholder="facebook (username only)" name="facebook" 
                         value={facebook} onChange={e => onChange(e)}/>
                     </div>
                     <div className="form-group  social-input">
                         <i className="fab fa-linkedin"></i>
-                        <input type="text" placeholder="linkedin" name="linkedin" 
+                        <input type="text" placeholder="linkedin (username only)" name="linkedin" 
                         value={linkedin} onChange={e => onChange(e)}/>
                     </div>
                     <div className="form-group  social-input">
                         <i className="fab fa-instagram"></i>
-                        <input type="text" placeholder="instagram" name="instagram" 
+                        <input type="text" placeholder="instagram (username only)" name="instagram" 
                         value={instagram} onChange={e => onChange(e)}/>
                     </div>
                 </Fragment>}

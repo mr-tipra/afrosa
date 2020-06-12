@@ -69,7 +69,7 @@ UserSchema.methods.sendVerificationMail = async function(req, res){
     try{
         //send verifiction mail
         const token = await jwt.sign({id: this.id}, process.env.JWT_SECRET,{
-            expiresIn:600
+            expiresIn:"5d"
         });
 
         //create verification url

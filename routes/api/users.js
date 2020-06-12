@@ -166,4 +166,28 @@ router.put("/collegeverify/:eno", [protect, authorize('admin',"student_relations
 });
 
 
+//@desc   verify college by enroll no
+//@route  PUT /api/:eno
+//@access private
+router.put("/emailverify/all", [protect, authorize('admin')], async (req, res, next) =>{
+       
+       try{
+              const user = await User.find({email_verified:false});
+              if(!user)
+                     return next(new ErrorResponse("No user by given enroll number", 400, ERROR_INVALID_INPUT));
+              if(user.length > 0){
+                     user.forEach(u => {
+                            u.email_verified = true;
+                            u.save();
+                     });
+              }
+              
+              return res.status(200).json({success:true});
+       }catch(err){
+              return next(err);
+       }
+});
+
+
+
 module.exports = router;
