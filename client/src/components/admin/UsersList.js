@@ -20,6 +20,10 @@ const UsersList = ({admin, getAllUsers, getAllStudents, getAllAlumni,user}) => {
         setQuery({...query, [e.target.name]: !e.target.checked});
     }
 
+    const onChangeEnroll = e => {
+        setQuery({...query, [e.target.name]: e.target.value});
+    }
+
     useEffect(() => {
         if(user.role === 'student_relations')
             getAllStudents(query);
@@ -27,7 +31,7 @@ const UsersList = ({admin, getAllUsers, getAllStudents, getAllAlumni,user}) => {
             getAllAlumni(query);
         else
             getAllUsers(query);
-    },[query]);
+    },[query, query.enroll_no]);
 
     return (
         <section className="container">
@@ -38,6 +42,11 @@ const UsersList = ({admin, getAllUsers, getAllStudents, getAllAlumni,user}) => {
                 defaultChecked={false}
                 onChange = {onChange}/>
                 <label className="p-1" htmlFor="college_verified">Only college unverified</label>
+
+                <div className="form-group">
+                    <input type="text" name="enroll_no" placeholder="Enroll No."
+                    onChange={onChangeEnroll}/>
+                </div>
             </div>
             <div className="profiles-admin">
                 {admin && admin.loading ? <Spinner /> :

@@ -37,7 +37,14 @@ router.get("/stats", async (req, res, next) => {
 router.get("/", [protect, authorize('admin')], async (req, res, next) =>{
        
        try{
-              
+              if(req.query.enroll_no && req.query.enroll_no !== ""){
+                     req.query.enroll_no = {
+                            "$regex":req.query.enroll_no
+                     }
+              }
+              else if(req.query.enroll_no === "")
+                     delete req.query.enroll_no;
+
               const users = await User.find({
                      ...req.query,
                      '$or':[{role:'student'}, {role:'alumnus'}]
@@ -166,8 +173,26 @@ router.put("/collegeverify/:eno", [protect, authorize('admin',"student_relations
 });
 
 
+//@desc verify email by uid
+//@route PUT /api/emailverify/:uid
+//@access admin
+router.put("/emailverify/:eno", [protect, authorize('admin',"student_relations","alumni_relations")], async (req, res, next) =>{
+       
+       try{
+              const user = await User.findOne({enroll_no:req.params.eno});
+              if(!user)
+                     return next(new ErrorResponse("No user by given enroll number", 400, ERROR_INVALID_INPUT));
+              user.email_verified = true;
+              await user.save();
+              return res.status(200).json({success:true});
+       }catch(err){
+              return next(err);
+       }
+});
+
+
 //@desc   verify college by enroll no
-//@route  PUT /api/:eno
+//@route  PUT /api/emailverify/all
 //@access private
 router.put("/emailverify/all", [protect, authorize('admin')], async (req, res, next) =>{
        

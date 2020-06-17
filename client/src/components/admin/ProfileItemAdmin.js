@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {verifyUser, deleteUser} from "../../actions/admin";
+import {verifyUser, deleteUser, verifyEmail} from "../../actions/admin";
 
-const ProfileItemAdmin = ({user, verifyUser, deleteUser}) => {
+const ProfileItemAdmin = ({user, verifyUser, deleteUser, verifyEmail}) => {
 
     const onClickDelete = e => {
         const del = window.confirm("Are you sure about deleting this account?");
@@ -28,6 +28,7 @@ const ProfileItemAdmin = ({user, verifyUser, deleteUser}) => {
             <Link className="btn btn-primary" to={`/profile/${user._id}`}>View Profile</Link>
             <button className="btn btn-danger my-1" onClick={onClickDelete}>Delete</button>
             {!user.college_verified && <button className="btn btn-danger my-1" onClick={e => verifyUser(user.enroll_no)}>Verify User</button> }
+            {!user.email_verified && <button className="btn btn-danger my-1" onClick={e => verifyEmail(user.enroll_no)}>Verify Email</button>}
 
         </div>
     )
@@ -39,4 +40,4 @@ ProfileItemAdmin.propTypes = {
     deleteUser: PropTypes.func.isRequired,
 }
 
-export default connect(null, {verifyUser, deleteUser})(ProfileItemAdmin);
+export default connect(null, {verifyUser, deleteUser, verifyEmail})(ProfileItemAdmin);
