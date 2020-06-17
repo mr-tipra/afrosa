@@ -61,7 +61,14 @@ router.get("/", [protect, authorize('admin')], async (req, res, next) =>{
 //@access private
 router.get("/students", [protect, authorize('admin', 'student_relations','alumni_relations')], async (req, res, next) =>{
        try{
-              
+              if(req.query.enroll_no && req.query.enroll_no !== ""){
+                     req.query.enroll_no = {
+                            "$regex":req.query.enroll_no
+                     }
+              }
+              else if(req.query.enroll_no === "")
+                     delete req.query.enroll_no;
+   
               const users = await User.find({...req.query, role:'student'});
               return res.status(200).json({success:true, users});
        }catch(err){
@@ -75,7 +82,14 @@ router.get("/students", [protect, authorize('admin', 'student_relations','alumni
 //@access private
 router.get("/alumni", [protect, authorize('admin', 'student_relations','alumni_relations')], async (req, res, next) =>{
        try{
-              
+              if(req.query.enroll_no && req.query.enroll_no !== ""){
+                     req.query.enroll_no = {
+                            "$regex":req.query.enroll_no
+                     }
+              }
+              else if(req.query.enroll_no === "")
+                     delete req.query.enroll_no;
+
               const users = await User.find({...req.query, role:'alumnus'});
               return res.status(200).json({success:true, users});
        }catch(err){
