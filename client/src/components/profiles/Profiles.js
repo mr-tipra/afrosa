@@ -104,9 +104,9 @@ const Profiles = props => {
                 <div className="form-group">
                     <span className="form-text">Search For:</span>
                     <select name="role" onChange={onChange}>
+                        <option value="">All</option>
                         <option value="student">Students</option>
                         <option value="alumnus">Alumni</option>
-                        <option value="">All</option>
                     </select>
                 </div>
             </form>
