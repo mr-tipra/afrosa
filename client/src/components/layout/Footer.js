@@ -12,7 +12,7 @@ const Footer = () => {
                     <li><a href="https://twitter.com/AfrosaUecu"><i className="fab fa-twitter"></i></a></li>
                     <li><a href="https://www.linkedin.com/in/afrosa-uecu-a324561a8/"><i className="fab fa-linkedin"></i></a></li>
                 </ul>
-                <p className="copyright">&copy; Afrosa</p>
+                <p className="copyright">&copy; Afrosa. Made by Arpit</p>
             </div>
             <div className="footer-right">
                 <h2>Contact Us</h2>

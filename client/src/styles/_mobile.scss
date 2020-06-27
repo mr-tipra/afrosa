@@ -133,6 +133,12 @@
 
 
     //teams page
+    .founders{
+        .founder{
+            width: 100%;
+
+        }
+    }
     .team{
         flex-direction: column;
         position:relative;
@@ -184,6 +190,12 @@
         &-right{
             h2{
                 text-align: left;
+            }
+            .contacts{
+                flex-direction: column;   
+                .contact{
+                    margin-top: 0.5rem;
+                }
             }
 
         }

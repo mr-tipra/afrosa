@@ -21,7 +21,7 @@ const Stats = props => {
                         clearInterval(id1);
                         return {...state, students:res.data.stats.students};
                     }
-                    return {...state, students: state.students+1}
+                    return {...state, students: state.students+5}
                 });
              }, 33);
 
@@ -31,7 +31,7 @@ const Stats = props => {
                         clearInterval(id2);
                         return {...state, alumni:res.data.stats.alumni};
                     }
-                    return {...state, alumni: state.alumni+1}
+                    return {...state, alumni: state.alumni+5}
                 });
              }, 33);
 
@@ -41,7 +41,7 @@ const Stats = props => {
                         clearInterval(id3);
                         return {...state, companies:res.data.stats.companies};
                     }
-                    return {...state, companies: state.companies+1}
+                    return {...state, companies: state.companies+5}
                 });
              }, 33);
              ids.push(id1);
