@@ -82,28 +82,28 @@ const Teams = props => {
                         <img src={adarsh_ceo} alt="ceo"/>
                     </div>
                     <span className="name">Adarsh Gupta</span>
-                    <span className="role">CEO</span>
+                    <span className="role">Executive Head</span>
                 </div>
                 <div className="founder">
                     <div className="image">
                         <img src={karan_cmo} alt="cmo"/>
                     </div>
                     <span className="name">Karan Singh Tomar</span>
-                    <span className="role">CMO</span>
+                    <span className="role">Management Head</span>
                 </div>
                 <div className="founder">
                     <div className="image">
                         <img src={vikram_cao} alt="cao"/>
                     </div>
                     <span className="name">Vikram Kesharwani</span>
-                    <span className="role">CAO</span>
+                    <span className="role">Administrative Head</span>
                 </div>
                 <div className="founder">
                     <div className="image">
                         <img src={arpit_dev} alt="lead developer"/>
                     </div>
                     <span className="name">Arpit Singh</span>
-                    <span className="role">Lead Developer</span>
+                    <span className="role">Technical Head</span>
                 </div>
             </div>
             <h1 >Our Team</h1>
